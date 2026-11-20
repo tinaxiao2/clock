@@ -101,7 +101,8 @@
         '<div class="lst-top"><b>' + esc(l.seller) + '</b><span class="lst-price">' + money(l) + '</span></div>' +
         '<div class="lst-sub">' + esc(l.title || '') + (l.shipping ? ' · ' + esc(l.shipping) : '') + '</div>' +
         '<div class="tags">' + tag(STATUS[l.status] || STATUS.unknown) + '<span class="tag plain">' + (l.verified === 'opened' ? 'Page checked' : 'Seen in search only') + '</span>' +
-        (l.returns ? '<span class="tag plain">' + esc(l.returns) + '</span>' : '') + '</div>' +
+        (l.returns ? '<span class="tag plain">' + esc(l.returns) + '</span>' : '') +
+        (l.tags || []).map(function (t) { return '<span class="tag plain">' + esc(t) + '</span>'; }).join('') + '</div>' +
         (l.note ? '<p class="lst-note">' + esc(l.note) + '</p>' : '') +
         (l.caution ? '<p class="lst-warn">' + esc(l.caution) + '</p>' : '') +
         '<span class="lst-open">Open listing ↗</span></a>';
@@ -343,7 +344,7 @@
         '<div class="ctl"><button data-mv="-1" aria-label="Move up"' + (i === 0 ? ' disabled' : '') + '>↑</button><button data-mv="1" aria-label="Move down"' + (i === k.length - 1 ? ' disabled' : '') + '>↓</button></div></div>';
       return '<div class="row plainrow" data-id="' + w.id + '">' + thumb(w) + rowText(w, buyLine(w) + '<button class="rm" data-rm="1">Remove</button>') + '<button class="ghost small" data-set="o">I own it</button></div>';
     }).join('') + '</div>';
-    h += totalLine(D, k);
+    if (D.own) h += totalLine(D, k);
     if (k.length || o.length) {
       h += '<div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" id="copyBtn">Copy as text</button>' +
         (left ? '<button class="ghost" data-go="' + D.deckHash + '">' + left + ' more to see</button>' : '') + '</div><div id="copyOut"></div>';

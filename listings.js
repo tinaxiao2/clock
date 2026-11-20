@@ -58,9 +58,9 @@
         }
       },
       'f-nixon': {
-        summary: 'Nixon’s own store lists it at $150. Its page sits on an address this session cannot open yet, so stock is unconfirmed.',
+        summary: 'In stock at Nixon’s own store at $150.',
         items: [
-          { seller: 'Nixon US', title: 'Small Time Teller · All Gold · A399-502-00', price: 150, status: 'unknown', verified: 'search', url: 'https://nixon.com/products/small-time-teller-all-gold', note: 'Brand store. A search snapshot showed it in stock, with free shipping over $100.' },
+          { seller: 'Nixon US', title: 'Small Time Teller · All Gold · A399-502-00', price: 150, status: 'in_stock', verified: 'opened', url: 'https://www.nixon.com/products/small-time-teller-all-gold', note: 'Brand store.' },
           { seller: 'BoxLunch', title: 'Small Time Teller · All Gold', price: 150.9, status: 'unknown', verified: 'search', url: 'https://www.boxlunch.com/product/nixon-small-time-teller-all-gold-watch/17667363.html' },
           { seller: 'Tillys', title: 'Small Time Teller · gold', price: 150, status: 'unknown', verified: 'search', url: 'https://www.tillys.com/product/nixon-small-time-teller-womens-watch/46233562101.html', caution: 'The search snapshot is more than two years old.' }
         ]
@@ -74,9 +74,8 @@
         ]
       },
       'f-seiko-tank': {
-        summary: 'Two US dealers that listed it last round have removed it, so it may be on its way out. Seiko’s own US store still showed it at $225 in search results.',
+        summary: 'Seiko’s own US store no longer lists it, and neither do two dealers that carried it. It looks discontinued, so what is left is old stock at discount sellers I could not open.',
         items: [
-          { seller: 'Seiko USA', title: 'SWR054 · white dial, black strap', price: 225, status: 'unknown', verified: 'search', url: 'https://seikousa.com/products/swr054/1000', note: 'Brand store.' },
           { seller: 'Timepiece.com', title: 'SWR054 · white dial, black strap', price: 140.97, status: 'unknown', verified: 'search', url: 'https://timepiece.com/seiko-quartz-ladies-watch-swr054.html', note: 'Lowest price seen. A search snapshot said in stock.', caution: 'A discount seller I could not vet. Ask whether the Seiko warranty applies.' },
           { seller: 'Espling Jewelers', title: 'SWR054', price: 172, status: 'unknown', verified: 'search', url: 'https://www.esplingjewelers.com/products/ladys-yellow-seiko-watch-new-swr054', note: 'A search snapshot showed one left.' }
         ]
@@ -153,4 +152,73 @@
       }
     }
   };
+})();
+
+/* ---- The Main Watch shortlist ---- */
+(function () {
+  var D1 = 'https://www.1stdibs.com/jewelry/watches/wrist-watches/';
+  var WP = 'https://thewatchpreserve.com/products/', GA = 'https://shop.gauthierwatches.com/products/';
+  var M = {
+    'gs-stgf359': {
+      summary: 'Buy it new. Two dealers list it new at $2,600, and the one used example I could open costs more than that.',
+      items: [
+        { seller: 'Exquisite Timepieces', title: 'STGF359 · new', price: 2600, status: 'in_stock', verified: 'opened', tags: ['New'], url: 'https://www.exquisitetimepieces.com/products/grand-seiko-stgf359-snowflake', note: 'New stock from a Grand Seiko dealer. Search results mention the five-year Grand Seiko warranty; confirm it at checkout.' },
+        { seller: 'The 1916 Company', title: 'STGF359 · new', price: 2600, status: 'for_sale', verified: 'opened', tags: ['New'], url: 'https://www.the1916company.com/watches/grand-seiko/heritage/stgf359/', note: 'Listed at $2,600. You inquire to buy; there is no cart button.' },
+        { seller: 'Bob’s Watches', title: 'STGF359 · pre-owned', price: 2695, status: 'in_stock', verified: 'opened', tags: ['Pre-owned'], url: 'https://www.bobswatches.com/grand-seiko/used-ladies-grand-seiko-heritage-collection-ref-stgf359-white-dial.html', note: 'A 2024 example with box and papers, per the search listing.', caution: 'Costs $95 more than a new one.' },
+        { seller: 'Longs Jewelers', title: 'STGF359 · new', price: 2500, status: 'unknown', verified: 'search', tags: ['New'], url: 'https://www.longsjewelers.com/products/grand-seiko-ladies-stgf359-lbws0226', note: 'The lowest new price seen.', caution: 'From a search snapshot. $100 under list is unusual for Grand Seiko, so confirm.' },
+        { seller: 'Chrono24 (Japan)', title: 'STGF359 · like new, box and papers', price: 2202, status: 'unknown', verified: 'search', url: 'https://www.chrono24.com/grandseiko/grand-seiko-heritage-collection-stainless-steel-stgf359--id19836224.htm', caution: 'Ships from Japan: add duty and shipping, and the warranty may be Japan-only.' }
+      ]
+    },
+    'must-vermeil': {
+      summary: 'The strongest listings on your shortlist. A Must de Cartier specialist has a quartz one, fully serviced and freshly re-plated, at $2,700 with a one-year warranty. That answers most of this watch’s weaknesses.',
+      items: [
+        { seller: 'Gauthier', title: '1980s Must Tank · quartz · large · yellow Roman dial', price: 2700, status: 'in_stock', verified: 'opened', tags: ['1980s', 'Serviced', '1-year warranty', '23 × 30 mm'], returns: 'Returns accepted', url: GA + '1980s-vintage-cartier-must-de-tank-quartz-vermeil-large-model-ref-881008-yellow-lemon-dial-copy', note: 'Fully serviced quartz movement. The case has been re-plated in 18k gold, so there is no wear-through. Free insured US shipping.', caution: 'Re-plating means it is not all original. That matters to collectors, not to wearing it. Returns may carry a restocking fee.' },
+        { seller: 'Analog:Shift', title: '1980s Must Tank · hand-wound · black dial', price: 2495, status: 'in_stock', verified: 'opened', tags: ['1980s', 'Hand-wound', '2-year warranty', '24 mm'], url: 'https://www.analogshift.com/products/cartier-must-de-cartier-tank-as12310', note: 'Gold-plated case in excellent condition with minimal oxidation, per the dealer. A burgundy-dial twin is the same price.', caution: 'Mechanical, so you wind it each day. In return there is no forty-year-old quartz circuit to fail.' },
+        { seller: 'Gauthier', title: '1970s Must Tank · hand-wound · large · yellow dial', price: 3050, status: 'in_stock', verified: 'opened', tags: ['1970s', 'Hand-wound', '1-year warranty'], returns: 'Returns accepted', url: GA + '1970s-vintage-vermeil-cartier-must-de-tank-vermeil-large-model-yellow-lemon-dial-with-box-and-cartier-strap-copy', note: 'One of about ten Must Tanks this dealer has in stock at $2,700–3,050, small and large.' },
+        { seller: 'The Watch Preserve', title: 'Must Tank 2413 · quartz · date', price: 3200, status: 'in_stock', verified: 'opened', tags: ['Quartz', '30 × 34 mm'], returns: '7-day returns', url: WP + 'vintage-must-de-cartier-tank-2414', note: 'A later, larger Must with a date window. Running and keeping time.', caution: 'Bigger than the one on this card, and no warranty is stated.' }
+      ]
+    },
+    'lady-datejust': {
+      summary: 'Under $5,000 every example has a catch, and the dealer states each one plainly. The cleanest is $4,700 with a badly stretched bracelet. Bob’s Watches has seven better ones, from $6,495.',
+      items: [
+        { seller: 'The Watch Preserve', title: 'Rolex 69173 · 1986 · champagne dial, fluted bezel', price: 4700, status: 'in_stock', verified: 'opened', tags: ['1986', 'Running −2 s/day', 'Bracelet 6.5″'], returns: '7-day returns', url: WP + 'vintage-rolex-datejust-69174', note: 'Stick-marker champagne dial with no aftermarket note, and the 18k fluted bezel. The bracelet fits a 6.5-inch wrist.', caution: 'The dealer calls the bracelet stretch “severe”. Budget for a repair or ask for a discount. No box, papers or warranty mentioned.' },
+        { seller: 'The Watch Preserve', title: 'Rolex 69173 · 1985 · champagne dial', price: 3900, status: 'in_stock', verified: 'opened', tags: ['1985', 'Running +3 s/day'], returns: '7-day returns', url: WP + 'vintage-rolex-oyster-perpetual-datejust-69174', caution: 'The dealer states the dial is aftermarket and not centred, and the bracelet has some stretch.' },
+        { seller: 'The Watch Preserve', title: 'Rolex 69173 · 1987 · gold dial, on leather', price: 3000, status: 'in_stock', verified: 'opened', tags: ['1987', 'Running +3 s/day'], returns: '7-day returns', url: WP + 'vintage-rolex-oyster-perpetual-datejust-69173', caution: 'Diamond markers were added to a spotted dial, and it comes on a crocodile strap with no Rolex bracelet.' },
+        { seller: 'Bob’s Watches', title: 'Rolex 69173 · champagne dial · seven in stock', price: 6495, status: 'in_stock', verified: 'opened', url: 'https://www.bobswatches.com/rolex/lady_datejust-69173-champagne', note: 'The specialist dealer. Seven examples at $6,495–6,695.', caution: 'Over your $5,000 ceiling.' }
+      ]
+    },
+    'tank-must': {
+      summary: 'New from Cartier at $3,900 is still the buy. The one unused example I found is only $150 less, has a black dial, and comes without box, papers or Cartier’s warranty.',
+      items: [
+        { seller: 'Cartier US', title: 'WSTA0136 · large, steel, black strap · new', price: 3900, status: 'unknown', verified: 'search', tags: ['New'], url: 'https://www.cartier.com/en-us/watches/collections/tank/tank-must-de-cartier-watch-CRWSTA0136.html', note: 'Search results showed it as “unavailable online”, which means buying through a boutique or by phone.', caution: 'Cartier’s site is not reachable from here, so stock is unconfirmed.' },
+        { seller: 'Gray & Sons', title: 'Tank Must large WSTA0108 · black dial · unused', price: 3750, status: 'in_stock', verified: 'opened', tags: ['Unused', '12-month dealer warranty', 'No box or papers', '25.5 × 33.7 mm'], url: 'https://www.grayandsons.com/w530617-unused-cartier-tank-tank-must-large-m/', note: 'Black dial on a black alligator strap. The dealer takes offers.', caution: 'Only $150 less than new, with a dealer warranty in place of Cartier’s. Not the white Roman dial on this card.' }
+      ]
+    },
+    'panthere-steel': {
+      summary: 'No small steel Panthère under $5,000 could be confirmed today. The dealers I can open have sold theirs, and 1stDibs sellers ask $6,000–6,800, more than the $5,300 a new one costs. Do not pay over retail.',
+      items: [
+        { seller: 'Cartier US', title: 'WSPN0006 · new', price: 5300, status: 'unknown', verified: 'search', tags: ['New'], url: 'https://cartier.com/en-us/watches/collections/panthere-de-cartier/panthere-de-cartier-watch-small-model-CRWSPN0006.html', note: 'The benchmark: new, with Cartier’s warranty.', caution: 'Just over your ceiling. Cartier’s site is not reachable from here.' },
+        { seller: 'Bob’s Watches', title: 'Panthère W25033P5 · vintage small steel · 1996', price: 4795, status: 'in_stock', verified: 'opened', tags: ['1996', 'Box & papers', '22 mm'], url: 'https://www.bobswatches.com/cartier/pre-owned-cartier-panthere-ref-w25033p5-stainless-steel-small-model.html', note: 'The same shape from the original run, with box and papers.', caution: 'A thirty-year-old watch at nearly the price of a new one. Check the bracelet for stretch.' },
+        { seller: '1stDibs', title: 'WSPN0006 · pre-owned', price: 5990, status: 'in_stock', verified: 'opened', url: D1 + 'cartier-ladies-stainless-steel-panthere-watch-wspn0006-4177/id-j_29032252/', caution: 'More than a new one costs. Shown so you recognise an overpriced listing.' }
+      ]
+    },
+    'reverso': {
+      summary: 'Nothing in steel and gold is confirmed for sale: every dealer listing I opened had sold, at $3,650–4,650 over the past two years. The one small quartz Reverso I could confirm is steel, at $5,200.',
+      items: [
+        { seller: 'Analog:Shift', title: 'Reverso · steel · quartz · 19 × 26 mm case', price: 5200, status: 'in_stock', verified: 'opened', tags: ['Quartz', 'Steel', '2-year warranty'], url: 'https://www.analogshift.com/products/jaeger-lecoultre-reverso-as12641', note: 'A plain closed back you could engrave. On an alligator strap with a steel buckle.', caution: 'Steel, not the steel-and-gold you kept, and $200 over your ceiling.' },
+        { seller: 'Luxury Bazaar', title: 'Reverso Classic Small Q2618430 · steel · quartz', price: 5250, status: 'unknown', verified: 'search', tags: ['2018', 'Box & papers'], url: 'https://www.luxurybazaar.com/product/jaeger-lecoultre-reverso-classic-small-steel-watch-q2618430/', note: 'The newer small quartz model, 21 × 34 mm, with a two-year dealer warranty per the search listing.', caution: '$250 over your ceiling. A price tracker puts dealer prices nearer $4,700, so negotiate.' },
+        { seller: 'eBay', title: 'Reverso 260.5.08 · steel & gold · quartz · 20 × 33 mm', price: null, status: 'unknown', verified: 'search', url: 'https://www.ebay.com/itm/267834603872', note: 'The exact reference you kept. Chrono24 dealers ask about $4,500–5,900 for it.', caution: 'Price, seller and returns unknown. Confirm it is quartz and ask for measurements.' }
+      ]
+    },
+    'bulgari': {
+      summary: 'No solid-gold 26 mm example is confirmed for sale, and the price on this card was too low. A dealer sold one at $2,500 a year ago; today’s leads ask $2,400–2,900 on sites I cannot open, and 1stDibs sellers want $5,400 and up for the 33 mm.',
+      items: [
+        { seller: 'Elite Fine Jewelers', title: 'BB 26 GL · 18k yellow gold · 26 mm · leather strap', price: null, status: 'unknown', verified: 'search', url: 'https://www.elitefinejewelers.com/products/bvlgari-bb-26-gl-26mm-18k-yellow-gold-leather-strap-watch', note: 'Search results show an ask of $2,395 or $2,895 for this one.', caution: 'Confirm it is quartz, the gold hallmarks, that it runs, and whether the buckle is gold.' },
+        { seller: 'Chrono24', title: 'BB 26 GL · 18k · quartz', price: null, status: 'unknown', verified: 'search', url: 'https://chrono24.com/bulgari/bulgari-bb26gl-18k-womens-quartz-dress-watch--id29535488.htm', note: 'Asking prices for this reference on Chrono24 run about $2,100–4,400.', caution: 'Price, seller country and condition were not in the search snapshot.' },
+        { seller: '1stDibs', title: 'Bulgari Bulgari 33 mm · 18k yellow gold · brown strap', price: 5400, status: 'in_stock', verified: 'opened', tags: ['c. 2000', 'Condition: fair'], url: D1 + 'bulgari-mens-33mm-watch-18k-yellow-gold-brown-leather-strap-ref-bb30-gi/id-j_30038702/', caution: 'Over budget, and the seller rates the condition as fair.' },
+        { seller: 'Gray & Sons', title: 'Bulgari Bulgari 33 mm · steel', price: 2200, status: 'in_stock', verified: 'opened', tags: ['Steel'], url: 'https://www.grayandsons.com/w530254-bvlgari-bvlgari-33mm-bb33ss/', note: 'The same design in steel, from the dealer that sold the gold one.', caution: 'Steel, not gold.' }
+      ]
+    }
+  };
+  for (var k in M) window.LISTINGS.byId[k] = M[k];
 })();

@@ -8,7 +8,7 @@
 
   window.WATCH_META = {
     asOf: 'November 2026',
-    note: 'Specs and prices come from search summaries of maker, dealer and market-tracker pages; the pages themselves could not be opened, so confirm the details with the seller before you buy.'
+    note: 'Specs and price ranges come mostly from search summaries of maker, dealer and market-tracker pages. Listings marked “Page checked” were read from the seller’s own page on 20 November 2026; confirm everything else with the seller before you buy.'
   };
 
   window.WATCHES = [
@@ -58,7 +58,7 @@
       verdict: {
         fit: 'yes', budget: 'yes',
         fitNote: 'Right in the middle of your size band. At 35 mm top to bottom it leaves a clear margin of wrist on each side.',
-        budgetNote: 'About $2,600 new with a warranty, and $1,950–2,700 pre-owned. Some dealers ask retail or more for used ones, so new may be the better buy. It leaves room in the budget for a fun watch or two.'
+        budgetNote: 'About $2,600 new with a warranty, and $1,950–2,700 pre-owned. The used one I could open costs more than a new one, so buy new. It leaves room in the budget for a fun watch or two.'
       },
       why: [
         'You wanted the Snowflake for the dial. This is that dial in a case made for a wrist your size, for less than half the price of the 41 mm original.',
@@ -364,19 +364,19 @@
     },
     {
       id: 'bulgari', brand: 'Bulgari', name: 'Bulgari Bulgari', variant: 'Solid gold · quartz',
-      pitch: 'Solid 18k gold for under $2,500. A flat, coin-like bezel with the name engraved twice. Quartz, on a strap.',
+      pitch: 'Solid 18k gold from about $2,400. A flat, coin-like bezel with the name engraved twice. Quartz, on a strap.',
       refs: ['BB 26 GL', 'BB 33 GL (33 mm)'], metal: 'gold', movement: 'Quartz', movementShort: 'Quartz',
       bracelet: 'Leather strap', era: 'Older production; pre-owned',
       size: { shape: 'round', w: 26, l2l: 31, approx: true },
       draw: { style: 'round', bezelW: .16, bracelet: 'leather', strap: 'black', bw: .5, dial: '#17181C', markers: 'stick', ink: '#CFAA61', hands: '#CFAA61' },
-      price: { preLow: 1700, preHigh: 2500, sources: 'Gray & Sons sold listings and Wristler' },
+      price: { preLow: 2100, preHigh: 4400, sources: 'Gray & Sons sold listings, Chrono24 asking prices and 1stDibs' },
       verdict: {
         fit: 'yes', budget: 'yes',
         fitNote: 'At 26 mm with short lugs it sits small and round, like a gold coin on a strap. The 33 mm version is the bolder, more masculine option and still inside your band.',
-        budgetNote: 'About $1,700–2,500 for the 26 mm, below your floor. The 33 mm runs $2,700–4,000. Either leaves money for the fun rotation.'
+        budgetNote: 'I first showed $1,700–2,500, which is what dealers sold these for a year or more ago. Today’s asking prices run about $2,100–4,400 for the 26 mm, and $5,400 and up for the 33 mm.'
       },
       why: [
-        'It is the only solid-gold watch here that is quartz and comfortably in budget.',
+        'It is the only solid-gold watch here that is quartz and in budget.',
         'The design is based on a Roman coin, with the name running around the rim like an inscription. Small, graphic and unmistakably deliberate.'
       ],
       honest: [
@@ -419,7 +419,9 @@
         'Mineral glass scratches, and there is no water resistance at all. Hand-washing counts.',
         'The movements are 30–45 years old. They do fail, and a leaked battery can destroy one.',
         'Heavily faked. The case should be stamped as silver, with a signed back carrying a reference and serial number.',
-        'If the Timex dying after nine months hurt, this one could hurt again.'
+        'If the Timex dying after nine months hurt, this one could hurt again.',
+        'Specialist dealers sell serviced, re-plated examples with a one-year warranty. That removes most of the risk, though not the lack of water resistance.',
+        'Some are hand-wound, not quartz. Those have no old quartz circuit to fail.'
       ],
       style: {
         cuff: 'Thin and flat; a natural under a cuff.',
