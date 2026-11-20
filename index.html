@@ -171,7 +171,7 @@
     <h1>The <i>next</i> watch.</h1>
     <p>Small, but serious. A considered search for a piece with masculine structure and feminine posture — sized for a 6¼″ wrist, built to outlast the last one.</p>
     <button class="cta" data-go="deck">Begin the edit</button>
-    <div><button class="linkbtn" data-go="picks">My shortlist</button></div>
+    <div><button class="linkbtn" data-go="picks">My shortlist</button> <button class="linkbtn" data-go="fun">The fun rotation</button></div>
   </header>
 
   <hr>
@@ -280,10 +280,12 @@
       <article class="grail">
         <header><div><div class="brand">Track I</div><h3>The Main Watch</h3></div><span class="tag ok">$2–5K</span></header>
         <p>The boardroom piece. Gold-leaning, quartz preferred, pre-owned welcome, 26–34mm. Built to last a decade.</p>
+        <p class="note"><a href="#deck" data-go="deck" style="color:var(--gold)">Open the shortlist →</a></p>
       </article>
       <article class="grail">
         <header><div><div class="brand">Track II</div><h3>The Fun Rotation</h3></div><span class="tag ok">Many</span></header>
-        <p>Heirs to the Teeny Tiny Timex: small, cheerful, inexpensive, easy to swap with the outfit or the mood. Tiny digitals, vintage finds, colored dials.</p>
+        <p>Heirs to the Teeny Tiny Timex: small, cheerful, under $500, easy to swap with the outfit or the mood. Tiny digitals, dainty gold, colour, vintage finds.</p>
+        <p class="note"><a href="#fun" data-go="fun" style="color:var(--gold)">Open the fun rotation →</a></p>
       </article>
       <article class="grail">
         <header><div><div class="brand">Track III</div><h3>The Build</h3></div><span class="tag ok">Open</span></header>
@@ -303,8 +305,9 @@
       <li class="done"><b>Wrist, metal &amp; budget</b><span>6¼″ wrist · gold-leaning · $2–5K.</span></li>
       <li class="done"><b>Condition, movement &amp; scope</b><span>Pre-owned OK · quartz-leaning · main watch + fun rotation + a build.</span></li>
       <li class="done"><b>The Main Watch shortlist</b><span>Swipe through candidates drawn to scale on your wrist, with prices, honest notes and styling. <a href="#deck" data-go="deck" style="color:var(--gold)">Open it →</a></span></li>
+      <li class="done"><b>The Fun Rotation</b><span>Small, playful watches under $500: want, own, passed. <a href="#fun" data-go="fun" style="color:var(--gold)">Open it →</a></span></li>
+      <li><b>Listings</b><span>Real watches for sale for each one you kept, checked against the cautions.</span></li>
       <li><b>Compare &amp; decide</b><span>Your finalists side by side, true to scale.</span></li>
-      <li><b>The Fun Rotation</b><span>A running list of small, playful watches: want, own, passed.</span></li>
       <li><b>The Build</b><span>Parts, tools and a plan for a watch you put together yourself.</span></li>
       <li><b>Try-on log</b><span>Notes and photos from the boutique.</span></li>
     </ul>
@@ -329,15 +332,16 @@
   <div class="topbar">
     <a href="#home" data-go="home" aria-label="Back to the front page">‹ Clock</a>
     <span class="mid" id="dkCount"></span>
-    <a href="#picks" data-go="picks" class="pill">Shortlist<b id="dkKept">0</b></a>
+    <a href="#picks" data-go="picks" class="pill" id="dkPill"><span id="dkPillLabel">Shortlist</span><b id="dkKept">0</b></a>
   </div>
+  <div class="chips" id="chips" hidden></div>
   <div class="feed" id="feed" aria-label="Watch candidates"></div>
 </div>
 
 <!-- ============ MY SHORTLIST ============ -->
 <div class="view" id="view-picks" hidden>
   <div class="topbar">
-    <a href="#deck" data-go="deck" aria-label="Back to the watches">‹ Watches</a>
+    <a href="#deck" data-go="deck" id="pkBack" aria-label="Back to the watches">‹ Watches</a>
     <span class="mid" id="pkCount"></span>
     <a href="#home" data-go="home">Home</a>
   </div>
@@ -352,7 +356,7 @@
     <span style="min-width:44px"></span>
   </div>
   <div class="scroll"><div class="inner" id="detailBody"></div></div>
-  <div class="foot"><button class="pass" id="dPass">Pass</button><button class="keep" id="dKeep">Keep</button></div>
+  <div class="foot"><button class="pass" id="dPass">Pass</button><button class="keep" id="dKeep">Keep</button><button class="own" id="dOwn" hidden>Own it</button></div>
 </div>
 
 <div class="toast" id="toast" hidden><span></span><button>Undo</button></div>
@@ -392,6 +396,7 @@
   try { if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){}); } catch (e) {}
 </script>
 <script src="watches.js"></script>
+<script src="fun.js"></script>
 <script src="draw.js"></script>
 <script src="deck.js"></script>
 </body>

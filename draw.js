@@ -10,6 +10,16 @@
   };
   var LEATHER = { black: ['#2B2B2E', '#151517'], brown: ['#6B4226', '#40260F'], burgundy: ['#6A2230', '#3D0F18'], navy: ['#27324F', '#141B2E'] };
 
+  METAL.black = { hi: '#5A5C63', mid: '#2B2C31', lo: '#121316', line: '#000000' };
+  METAL.rose = { hi: '#F7DCCF', mid: '#DBA58F', lo: '#9C6A56', line: '#6B4334' };
+  function shade(hex, amt) {
+    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    function f(c) { return Math.max(0, Math.min(255, Math.round(amt < 0 ? c * (1 + amt / 100) : c + (255 - c) * amt / 100))); }
+    return '#' + ((1 << 24) + (f(r) << 16) + (f(g) << 8) + f(b)).toString(16).slice(1);
+  }
+  function tint(hex) { return { hi: shade(hex, 45), mid: hex, lo: shade(hex, -35), line: shade(hex, -60) }; }
+  function M(m) { return METAL[m] || tint(m); } // a named finish, or any hex colour
+
   function r2(n) { return Math.round(n * 100) / 100; }
   function el(tag, a, inner) {
     var s = '<' + tag;
@@ -19,7 +29,9 @@
 
   function parts(metal) {
     // which metal each component is made of
-    if (metal === 'steel' || metal === 'titanium') return { c: 'steel', b: 'steel', s: 'steel', a: 'steel' };
+    if (metal === 'steel' || metal === 'titanium' || metal === 'chrome') return { c: 'steel', b: 'steel', s: 'steel', a: 'steel' };
+    if (metal === 'resin') return { c: 'black', b: 'black', s: 'black', a: 'black' };
+    if (metal === 'rose') return { c: 'rose', b: 'rose', s: 'rose', a: 'rose' };
     if (metal === 'two-tone') return { c: 'steel', b: 'gold', s: 'steel', a: 'gold' };
     return { c: 'gold', b: 'gold', s: 'gold', a: 'gold' }; // gold, vermeil, gold-plated
   }
@@ -31,7 +43,8 @@
     var l2l = s.l2l || s.h || s.w;
     var W = wrist ? 84 : Math.max(s.w + 12, 30), H = wrist ? 68 : l2l + 14;
     var cx = W / 2, cy = H / 2;
-    var armTop = cy - WRIST_MM / 2, armBot = cy + WRIST_MM / 2;
+    var BAND = w.finger ? 17 : WRIST_MM;
+    var armTop = cy - BAND / 2, armBot = cy + BAND / 2;
     var P = parts(w.metal);
     if (d.parts) for (var k in d.parts) P[k] = d.parts[k];
     var out = [], defs = [];
@@ -44,22 +57,27 @@
       defs.push('<linearGradient id="' + id + name + '" x1="0" y1="0" x2="1" y2="0">' +
         '<stop offset="0" stop-color="' + m.lo + '"/><stop offset=".45" stop-color="' + m.hi + '"/><stop offset="1" stop-color="' + m.lo + '"/></linearGradient>');
     }
-    ['gold', 'steel'].forEach(function (n) {
-      lin('c' + n, METAL[n], 0, 0, 1, 1);      // case (diagonal)
-      lin('r' + n, METAL[n], 1, 1, 0, 0);      // bezel (reverse diagonal)
-      band('b' + n, METAL[n]);                 // bracelet link (rounded look)
-    });
+    var made = {};
+    function key(m) { // build the three gradients for a finish the first time it is used
+      if (!made[m]) {
+        var k = 'm' + Object.keys(made).length; made[m] = k;
+        lin('c' + k, M(m), 0, 0, 1, 1);      // case (diagonal)
+        lin('r' + k, M(m), 1, 1, 0, 0);      // bezel (reverse diagonal)
+        band('b' + k, M(m));                 // bracelet link (rounded look)
+      }
+      return made[m];
+    }
     defs.push('<linearGradient id="' + id + 'arm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F1E7" stop-opacity=".03"/><stop offset=".5" stop-color="#F6F1E7" stop-opacity=".13"/><stop offset="1" stop-color="#F6F1E7" stop-opacity=".03"/></linearGradient>');
     defs.push('<radialGradient id="' + id + 'sh" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/></radialGradient>');
-    defs.push('<clipPath id="' + id + 'clip"><rect x="-10" y="' + r2(wrist ? armTop : 0) + '" width="' + (W + 20) + '" height="' + r2(wrist ? WRIST_MM : H) + '"/></clipPath>');
-    function C(m) { return 'url(#' + id + 'c' + m + ')'; }
-    function R(m) { return 'url(#' + id + 'r' + m + ')'; }
-    function B(m) { return 'url(#' + id + 'b' + m + ')'; }
-    function L(m) { return METAL[m].line; }
+    defs.push('<clipPath id="' + id + 'clip"><rect x="-10" y="' + r2(wrist ? armTop : 0) + '" width="' + (W + 20) + '" height="' + r2(wrist ? BAND : H) + '"/></clipPath>');
+    function C(m) { return 'url(#' + id + 'c' + key(m) + ')'; }
+    function R(m) { return 'url(#' + id + 'r' + key(m) + ')'; }
+    function B(m) { return 'url(#' + id + 'b' + key(m) + ')'; }
+    function L(m) { return M(m).line; }
 
     // ---- wrist ----
     if (wrist) {
-      out.push(el('rect', { x: -10, y: armTop, width: W + 20, height: WRIST_MM, fill: 'url(#' + id + 'arm)' }));
+      out.push(el('rect', { x: -10, y: armTop, width: W + 20, height: BAND, fill: 'url(#' + id + 'arm)' }));
       out.push(el('line', { x1: -10, y1: armTop, x2: W + 10, y2: armTop, stroke: '#F6F1E7', 'stroke-opacity': .28, 'stroke-width': .25 }));
       out.push(el('line', { x1: -10, y1: armBot, x2: W + 10, y2: armBot, stroke: '#F6F1E7', 'stroke-opacity': .28, 'stroke-width': .25 }));
     }
@@ -69,15 +87,15 @@
     var x0 = cx - bw / 2;
     var segTop = wrist ? armTop - 1 : 0, segBot = wrist ? armBot + 1 : H;
     var br = [];
-    function cols(list, pitch, extra) {
+    function cols(list, pitch, extra, sw) {
       // list: [[fraction, 's'|'a'], ...]
       var x = x0;
       list.forEach(function (c, i) {
         var cw = c[0] * bw, m = P[c[1]];
         br.push(el('rect', { x: x, y: segTop, width: cw, height: segBot - segTop, fill: B(m) }));
         var off = (i % 2) * pitch / 2;
-        for (var y = cy - l2l / 2 - off; y > segTop; y -= pitch) br.push(el('line', { x1: x, y1: y, x2: x + cw, y2: y, stroke: L(m), 'stroke-width': .22, 'stroke-opacity': .7 }));
-        for (var y2 = cy + l2l / 2 + off; y2 < segBot; y2 += pitch) br.push(el('line', { x1: x, y1: y2, x2: x + cw, y2: y2, stroke: L(m), 'stroke-width': .22, 'stroke-opacity': .7 }));
+        for (var y = cy - l2l / 2 - off; y > segTop; y -= pitch) br.push(el('line', { x1: x, y1: y, x2: x + cw, y2: y, stroke: L(m), 'stroke-width': sw || .22, 'stroke-opacity': .7 }));
+        for (var y2 = cy + l2l / 2 + off; y2 < segBot; y2 += pitch) br.push(el('line', { x1: x, y1: y2, x2: x + cw, y2: y2, stroke: L(m), 'stroke-width': sw || .22, 'stroke-opacity': .7 }));
         if (i) br.push(el('line', { x1: x, y1: segTop, x2: x, y2: segBot, stroke: '#000', 'stroke-opacity': .28, 'stroke-width': .16 }));
         x += cw;
       });
@@ -98,12 +116,15 @@
     else if (bt === 'bars') cols([[1, 's']], 2.9, function (y) {
       br.push(el('rect', { x: x0 + bw * .04, y: y - .45, width: bw * .92, height: .9, rx: .4, fill: B(P.a), stroke: L(P.a), 'stroke-width': .08 }));
     });
-    else if (bt === 'leather') {
-      var lc = LEATHER[d.strap || 'black'];
+    else if (bt === 'mesh') cols([[1, 's']], .7, null, .1);
+    else if (bt === 'expansion') cols([[.18, 's'], [.64, 'a'], [.18, 's']], 1.5, null, .16);
+    else if (bt === 'bangle') br.push(el('rect', { x: x0, y: segTop, width: bw, height: segBot - segTop, fill: B(P.s) }));
+    else if (bt === 'leather' || bt === 'resin') {
+      var sc = d.strap || 'black', lc = LEATHER[sc] || [sc, shade(sc, -40)];
       defs.push('<linearGradient id="' + id + 'lth" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="' + lc[1] + '"/><stop offset=".5" stop-color="' + lc[0] + '"/><stop offset="1" stop-color="' + lc[1] + '"/></linearGradient>');
       var tp = bw * .06;
       br.push(el('path', { d: 'M' + r2(x0) + ' ' + r2(cy) + 'L' + r2(x0 + tp) + ' ' + r2(segTop) + 'H' + r2(x0 + bw - tp) + 'L' + r2(x0 + bw) + ' ' + r2(cy) + 'L' + r2(x0 + bw - tp) + ' ' + r2(segBot) + 'H' + r2(x0 + tp) + 'Z', fill: 'url(#' + id + 'lth)' }));
-      [x0 + bw * .12, x0 + bw * .88].forEach(function (sx) {
+      if (bt === 'leather') [x0 + bw * .12, x0 + bw * .88].forEach(function (sx) {
         br.push(el('line', { x1: sx, y1: segTop, x2: sx, y2: segBot, stroke: '#D9C9A6', 'stroke-opacity': .5, 'stroke-width': .14, 'stroke-dasharray': '.7 .6' }));
       });
     }
@@ -132,7 +153,7 @@
         var fl = [];
         for (var i = 0; i < 72; i++) {
           var a = i * 5 * Math.PI / 180;
-          fl.push(el('line', { x1: cx + (r - .5) * Math.sin(a), y1: cy - (r - .5) * Math.cos(a), x2: cx + (r - bz) * Math.sin(a), y2: cy - (r - bz) * Math.cos(a), stroke: i % 2 ? METAL[P.b].hi : METAL[P.b].lo, 'stroke-width': .35, 'stroke-opacity': .85 }));
+          fl.push(el('line', { x1: cx + (r - .5) * Math.sin(a), y1: cy - (r - .5) * Math.cos(a), x2: cx + (r - bz) * Math.sin(a), y2: cy - (r - bz) * Math.cos(a), stroke: i % 2 ? M(P.b).hi : M(P.b).lo, 'stroke-width': .35, 'stroke-opacity': .85 }));
         }
         out.push(fl.join(''));
       } else if (d.bezel === 'claws') {
@@ -157,7 +178,7 @@
       out.push(el('rect', { x: cx - side / 2 + .5, y: cy - side / 2 + .5, width: side - 1, height: side - 1, rx: rx * .9, fill: R(P.b), stroke: L(P.b), 'stroke-width': .1 }));
       var q = side / 2 - fr / 2 - .2, t = side * .22;
       [[-t, -q], [t, -q], [-t, q], [t, q], [-q, -t], [-q, t], [q, -t], [q, t]].forEach(function (p) {
-        out.push(el('circle', { cx: cx + p[0], cy: cy + p[1], r: side * .022 + .12, fill: METAL[P.b].lo, stroke: L(P.b), 'stroke-width': .08 }));
+        out.push(el('circle', { cx: cx + p[0], cy: cy + p[1], r: side * .022 + .12, fill: M(P.b).lo, stroke: L(P.b), 'stroke-width': .08 }));
       });
       hw = hh = side / 2 - fr; dialShape = 'rect';
       out.push(el('rect', { x: cx - hw, y: cy - hh, width: hw * 2, height: hh * 2, rx: rx * .45, fill: dialColor, stroke: L(P.b), 'stroke-width': .12 }));
@@ -171,6 +192,20 @@
       hw = s.w / 2 - tb - .15; hh = bodyH / 2 - .8; dialShape = 'rect';
       out.push(el('rect', { x: cx - hw, y: cy - hh, width: hw * 2, height: hh * 2, rx: .5, fill: dialColor, stroke: L(P.c), 'stroke-width': .12 }));
       crownX = cx + s.w / 2 - .1;
+    } else if (st === 'digital') {
+      var dgh = s.h || l2l, cf = s.w * .16;
+      var dx1 = cx - s.w / 2, dx2 = cx + s.w / 2, dyT = cy - dgh / 2, dyB = cy + dgh / 2;
+      [[-1, -.18], [-1, .18], [1, -.18], [1, .18]].forEach(function (b) {
+        out.push(el('rect', { x: cx + b[0] * (s.w / 2 + .1) - .6, y: cy + b[1] * dgh - 1, width: 1.2, height: 2, rx: .4, fill: C(P.a), stroke: L(P.a), 'stroke-width': .1 }));
+      });
+      out.push(el('path', { d: 'M' + r2(dx1 + cf) + ' ' + r2(dyT) + 'H' + r2(dx2 - cf) + 'L' + r2(dx2) + ' ' + r2(dyT + cf) + 'V' + r2(dyB - cf) + 'L' + r2(dx2 - cf) + ' ' + r2(dyB) + 'H' + r2(dx1 + cf) + 'L' + r2(dx1) + ' ' + r2(dyB - cf) + 'V' + r2(dyT + cf) + 'Z', fill: C(P.c), stroke: L(P.c), 'stroke-width': .15 }));
+      var fx = s.w * .1;
+      out.push(el('rect', { x: dx1 + fx, y: dyT + fx, width: s.w - 2 * fx, height: dgh - 2 * fx, rx: 1, fill: d.face || '#1B1D22', stroke: L(P.c), 'stroke-width': .1 }));
+      hw = s.w * .31; hh = dgh * .15; dialShape = 'rect';
+      out.push(el('rect', { x: cx - hw, y: cy - hh, width: hw * 2, height: hh * 2, rx: .5, fill: d.lcd || '#B9C4AE', stroke: '#000', 'stroke-opacity': .5, 'stroke-width': .1 }));
+      out.push(el('text', { x: cx, y: cy + hh * .5, 'text-anchor': 'middle', 'font-size': hh * 1.35, 'font-weight': 700, textLength: hw * 1.6, lengthAdjust: 'spacingAndGlyphs', fill: '#1D241B', 'font-family': 'ui-monospace,Menlo,Consolas,monospace' }, '10:08'));
+      out.push(el('rect', { x: cx - hw, y: cy - hh - dgh * .09, width: hw * .9, height: .5, fill: d.accent || C(P.a) }));
+      out.push(el('rect', { x: cx - hw, y: cy + hh + dgh * .07, width: hw * 2, height: .3, fill: '#F6F1E7', 'fill-opacity': .45 }));
     } else { // reverso, dolcevita: plain rectangle
       var ch = s.h || l2l * .8, crx = st === 'dolcevita' ? 1.8 : .7;
       [x0 - 1.1, x0 + bw - .5].forEach(function (lx) {
@@ -182,7 +217,7 @@
         [-1, 1].forEach(function (sd) {
           for (var g = 0; g < 3; g++) {
             var gy = cy + sd * (ch / 2 - .5 - g * (gb / 3));
-            out.push(el('line', { x1: cx - s.w / 2 + .5, y1: gy, x2: cx + s.w / 2 - .5, y2: gy, stroke: P.a !== P.c ? METAL[P.a].mid : L(P.c), 'stroke-width': P.a !== P.c ? .34 : .2, 'stroke-opacity': P.a !== P.c ? 1 : .75 }));
+            out.push(el('line', { x1: cx - s.w / 2 + .5, y1: gy, x2: cx + s.w / 2 - .5, y2: gy, stroke: P.a !== P.c ? M(P.a).mid : L(P.c), 'stroke-width': P.a !== P.c ? .34 : .2, 'stroke-opacity': P.a !== P.c ? 1 : .75 }));
           }
         });
         hw = s.w / 2 - s.w * .09; hh = ch / 2 - gb - .6;
@@ -210,13 +245,14 @@
     out.push(el(dialEl.tag, sa));
 
     // ---- markers ----
-    var ink = d.ink || '#1B1D22', mk = d.markers || 'stick', m = [];
+    var ink = d.ink || '#1B1D22', mk = st === 'digital' ? 'none' : (d.markers || 'stick'), m = [];
     function edge(a) { // distance from centre to dial edge along angle a
       if (dialShape === 'round') return hw;
       var dx = Math.abs(Math.sin(a)), dy = Math.abs(Math.cos(a));
       return Math.min(dx ? hw / dx : 1e9, dy ? hh / dy : 1e9);
     }
     for (var n = 0; n < 12; n++) {
+      if (mk === 'none') break;
       if (d.date && n === 3) continue;
       if (d.subseconds && n === 6) continue;
       var an = n * 30 * Math.PI / 180, e = edge(an);
@@ -245,13 +281,15 @@
       var a = deg * Math.PI / 180;
       return el('line', { x1: cx - len * .08 * Math.sin(a), y1: cy + len * .08 * Math.cos(a), x2: cx + l * Math.sin(a), y2: cy - l * Math.cos(a), stroke: col, 'stroke-width': wd, 'stroke-linecap': 'round' });
     }
+    if (st !== 'digital') {
     out.push(hand(304, len * .5, Math.max(.5, len * .09), hc));
     out.push(hand(48, len * .78, Math.max(.36, len * .06), hc));
     if (d.seconds) out.push(hand(180 + 25, len * .82, .16, d.seconds));
     out.push(el('circle', { cx: cx, cy: cy, r: Math.max(.4, len * .06), fill: hc }));
+    }
 
     // ---- crown ----
-    out.push(el('rect', { x: crownX, y: cy - 1.3, width: 1.6, height: 2.6, rx: .5, fill: C(P.a), stroke: L(P.a), 'stroke-width': .12 }));
+    if (crownX !== undefined) out.push(el('rect', { x: crownX, y: cy - 1.3, width: 1.6, height: 2.6, rx: .5, fill: C(P.a), stroke: L(P.a), 'stroke-width': .12 }));
     if (d.cabochon) out.push(el('circle', { cx: crownX + 1.5, cy: cy, r: .75, fill: '#2C4A9A', stroke: '#16285C', 'stroke-width': .1 }));
 
     // ---- dimension line ----
@@ -261,7 +299,7 @@
       out.push(el('text', { x: dxl + 1.6, y: cy + .9, 'font-size': 2.7, fill: gold, 'font-family': 'ui-monospace,Menlo,monospace' }, (s.approx ? '≈' : '') + r2(l2l) + ' mm'));
       var wx = 6;
       out.push(el('path', { d: 'M' + (wx - 1) + ' ' + r2(armTop) + 'h2M' + wx + ' ' + r2(armTop) + 'V' + r2(armBot) + 'M' + (wx - 1) + ' ' + r2(armBot) + 'h2', stroke: '#A7A49C', 'stroke-width': .15, fill: 'none', 'stroke-opacity': .7 }));
-      out.push(el('text', { x: wx + 1.4, y: armBot - 1.6, 'font-size': 2.3, fill: '#A7A49C', 'font-family': 'ui-monospace,Menlo,monospace' }, 'your wrist ≈' + WRIST_MM + ' mm'));
+      out.push(el('text', { x: wx + 1.4, y: armBot - 1.6, 'font-size': 2.3, fill: '#A7A49C', 'font-family': 'ui-monospace,Menlo,monospace' }, (w.finger ? 'a finger ≈' : 'your wrist ≈') + BAND + ' mm'));
     }
 
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + r2(W) + ' ' + r2(H) + '" class="' + (o.cls || 'wsvg') + '" role="img" aria-label="' +
