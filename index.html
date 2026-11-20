@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clock — The Next Watch</title>
+<meta name="description" content="A personal edit for choosing my next watch.">
+<meta name="theme-color" content="#14161B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Clock">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14161B; --ink-2:#1D2027; --line:#2E323B;
+    --paper:#F6F1E7; --muted:#A7A49C; --soft:#D9D3C6;
+    --gold:#C6A15B; --gold-hi:#E9D29A; --gold-lo:#8E6E33;
+    --serif:"Cormorant Garamond", "Times New Roman", serif;
+    --sans:"Inter", system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--ink);-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--sans);font-weight:300;color:var(--soft);background:var(--ink);
+    line-height:1.6;font-size:16px;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--paper);letter-spacing:.005em}
+  h2{font-size:30px;line-height:1.15;margin:10px 0 14px}
+  h3{font-size:22px;line-height:1.2}
+  p{color:var(--soft)}
+  em{font-family:var(--serif);font-style:italic;font-size:1.12em;color:var(--paper)}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  /* Top bar */
+  .top{display:flex;justify-content:space-between;align-items:center;padding:20px 0 0}
+  .mark{font-family:var(--serif);font-size:22px;color:var(--paper);letter-spacing:.06em}
+  .mark b{color:var(--gold);font-weight:400}
+  .digital{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--muted);
+    border:1px solid var(--line);border-radius:4px;padding:3px 8px;letter-spacing:.08em}
+
+  /* Hero */
+  .hero{text-align:center;padding:44px 0 52px}
+  .dial{width:168px;height:auto;margin:0 auto 34px;display:block;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+  .hero h1{font-size:46px;line-height:1.02;margin:14px 0 16px}
+  .hero h1 i{color:var(--gold-hi)}
+  .hero p{max-width:440px;margin:0 auto;font-size:16px}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:14px 26px;border-radius:999px;
+    background:linear-gradient(135deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo));color:var(--ink);
+    font-weight:500;font-size:14px;letter-spacing:.06em;text-decoration:none;border:0;cursor:pointer}
+  .cta small{font-weight:400;opacity:.7}
+
+  section{padding:48px 0}
+
+  /* Brief */
+  .brief{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px}
+  .brief div{background:var(--ink-2);padding:16px}
+  .brief dt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .brief dd{font-family:var(--serif);font-size:19px;color:var(--paper);line-height:1.25}
+
+  /* Muse */
+  .muse{background:var(--paper);color:var(--ink);border-radius:18px;padding:26px 24px;margin-top:22px;position:relative;overflow:hidden}
+  .muse .eyebrow{color:var(--gold-lo)}
+  .muse h3{color:var(--ink);font-size:26px;margin:8px 0 10px}
+  .muse p{color:#3A3B40}
+  .muse ul{list-style:none;margin-top:16px;display:grid;gap:8px}
+  .muse li{font-size:14px;padding-left:18px;position:relative;color:#2A2B30}
+  .muse li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:1px;background:var(--gold-lo)}
+  .muse a{color:var(--gold-lo);font-size:13px;display:inline-block;margin-top:16px}
+  .rip{position:absolute;right:20px;top:22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8A8578;border:1px solid #D8D0BE;border-radius:999px;padding:3px 9px}
+
+  /* Pillars */
+  .pillars{display:grid;gap:14px;margin-top:22px}
+  .pillar{border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;grid-template-columns:34px 1fr;gap:14px}
+  .pillar .n{font-family:var(--serif);font-size:28px;color:var(--gold);line-height:1}
+  .pillar h3{margin-bottom:4px}
+  .pillar p{font-size:15px}
+
+  /* Grails */
+  .grails{display:grid;gap:14px;margin-top:22px}
+  .grail{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .grail header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+  .grail .brand{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .tag{font-size:11px;letter-spacing:.06em;border-radius:999px;padding:3px 10px;white-space:nowrap}
+  .tag.ok{background:rgba(198,161,91,.16);color:var(--gold-hi)}
+  .tag.warn{background:rgba(220,140,110,.14);color:#E7A892}
+  .grail p{font-size:15px}
+  .grail .note{margin-top:10px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+
+  /* Fit meter */
+  .meter{margin-top:24px;border:1px solid var(--line);border-radius:14px;padding:20px}
+  .scale{position:relative;height:96px;margin:18px 4px 0}
+  .bar{position:absolute;left:0;right:0;top:26px;height:2px;background:var(--line)}
+  .zone{position:absolute;top:22px;height:10px;border-radius:5px;background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi),var(--gold-lo));opacity:.85}
+  .pin{position:absolute;top:0;transform:translateX(-50%);text-align:center;font-size:10px;color:var(--muted);white-space:nowrap}
+  .pin::after{content:"";display:block;width:1px;height:12px;background:var(--muted);margin:3px auto 0}
+  .pin.below{top:34px}.pin.below::after{display:none}.pin.below::before{content:"";display:block;width:1px;height:12px;background:var(--muted);margin:0 auto 3px}
+  .ticks{position:absolute;left:0;right:0;top:78px;font-size:11px;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+  .ticks span{position:absolute;transform:translateX(-50%)}
+  .meter p.small{font-size:13px;color:var(--muted);margin-top:12px}
+
+  /* Roadmap */
+  .road{list-style:none;margin-top:20px;border-left:1px solid var(--line);padding-left:20px;display:grid;gap:18px}
+  .road li{position:relative}
+  .road li::before{content:"";position:absolute;left:-25px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--ink);border:1px solid var(--gold)}
+  .road li.done::before{background:var(--gold)}
+  .road b{font-weight:500;color:var(--paper);display:block}
+  .road span{font-size:14px;color:var(--muted)}
+
+  /* Install */
+  .install{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:20px;font-size:14px}
+  .install ol{padding-left:18px;margin-top:8px;display:grid;gap:4px}
+  .install.hidden{display:none}
+
+  footer{text-align:center;padding:40px 0 56px;font-size:12px;color:var(--muted)}
+  footer .mark{font-size:18px;display:block;margin-bottom:6px}
+
+  /* Dialog */
+  .sheet{position:fixed;inset:0;background:rgba(10,11,14,.7);display:none;align-items:flex-end;justify-content:center;z-index:10;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .sheet.open{display:flex}
+  .sheet .card{background:var(--paper);color:var(--ink);border-radius:20px 20px 0 0;max-width:640px;width:100%;padding:28px 24px calc(28px + env(safe-area-inset-bottom))}
+  .sheet h3{color:var(--ink);font-size:26px;margin:6px 0 8px}
+  .sheet p{color:#3A3B40;font-size:15px}
+  .sheet button{margin-top:18px;background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:12px 22px;font:500 14px var(--sans);cursor:pointer}
+
+  @media (min-width:560px){ .hero h1{font-size:58px} .pillars{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){ #sec{display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span class="mark">CL<b>O</b>CK</span>
+    <span class="digital" id="digi" aria-label="Current time">--:--</span>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <svg class="dial" viewBox="0 0 200 260" role="img" aria-label="A small gold watch showing the current time">
+      <defs>
+        <linearGradient id="case" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#F1DFAE"/><stop offset=".45" stop-color="#C6A15B"/><stop offset="1" stop-color="#7E6029"/>
+        </linearGradient>
+        <linearGradient id="strap" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#8E6E33"/><stop offset=".5" stop-color="#E2C88C"/><stop offset="1" stop-color="#8E6E33"/>
+        </linearGradient>
+        <radialGradient id="face" cx=".4" cy=".35" r=".8">
+          <stop offset="0" stop-color="#FFFDF7"/><stop offset="1" stop-color="#ECE4D3"/>
+        </radialGradient>
+      </defs>
+      <!-- bracelet links -->
+      <g fill="url(#strap)">
+        <rect x="76" y="0" width="48" height="12" rx="3"/><rect x="76" y="15" width="48" height="12" rx="3"/><rect x="76" y="30" width="48" height="12" rx="3"/>
+        <rect x="76" y="218" width="48" height="12" rx="3"/><rect x="76" y="233" width="48" height="12" rx="3"/><rect x="76" y="248" width="48" height="12" rx="3"/>
+      </g>
+      <rect x="70" y="42" width="60" height="22" rx="6" fill="url(#case)"/>
+      <rect x="70" y="196" width="60" height="22" rx="6" fill="url(#case)"/>
+      <circle cx="100" cy="130" r="74" fill="url(#case)"/>
+      <rect x="170" y="123" width="9" height="14" rx="2" fill="url(#case)"/>
+      <circle cx="100" cy="130" r="63" fill="url(#face)"/>
+      <g id="ticks" stroke="#14161B" stroke-linecap="round"></g>
+      <text x="100" y="166" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="9" letter-spacing="2.5" fill="#8E6E33">PETITE</text>
+      <line id="hr"  x1="100" y1="130" x2="100" y2="96"  stroke="#14161B" stroke-width="4" stroke-linecap="round"/>
+      <line id="min" x1="100" y1="130" x2="100" y2="80"  stroke="#14161B" stroke-width="2.4" stroke-linecap="round"/>
+      <line id="sec" x1="100" y1="140" x2="100" y2="76"  stroke="#B08A42" stroke-width="1" stroke-linecap="round"/>
+      <circle cx="100" cy="130" r="3.6" fill="#B08A42"/>
+    </svg>
+
+    <span class="eyebrow">A private edit</span>
+    <h1>The <i>next</i> watch.</h1>
+    <p>Small, but serious. A considered search for a piece with masculine structure and feminine posture — sized for a 5′1″ wrist, built to outlast the last one.</p>
+    <button class="cta" id="start">Begin the edit <small>— soon</small></button>
+  </header>
+
+  <hr>
+
+  <!-- BRIEF -->
+  <section id="brief">
+    <span class="eyebrow">01 · The brief</span>
+    <h2>Who it's for</h2>
+    <p>Regulatory intelligence lead in a tech-exec room that skews male. The watch should read as <em>authority</em>, not accessory — and never as borrowed.</p>
+    <dl class="brief">
+      <div><dt>Frame</dt><dd>5′1″ · 120 lb · petite wrist</dd></div>
+      <div><dt>Wardrobe</dt><dd>Corporate, traditional, tailored</dd></div>
+      <div><dt>Signature</dt><dd>Masculine structure, feminine posture</dd></div>
+      <div><dt>Leans toward</dt><dd>Dainty gold, men's design language</dd></div>
+      <div><dt>Hard no</dt><dd>“Stole it from my dad”</dd></div>
+      <div><dt>Lesson learned</dt><dd>It has to last</dd></div>
+    </dl>
+  </section>
+
+  <hr>
+
+  <!-- MUSE -->
+  <section id="muse">
+    <span class="eyebrow">02 · The muse</span>
+    <h2>Where the taste comes from</h2>
+    <article class="muse">
+      <span class="rip">9 months · retired</span>
+      <span class="eyebrow">Timex × Dimepiece</span>
+      <h3>Teeny Tiny Timex</h3>
+      <p>The favorite. A tiny-Casio spirit in a jewelry-scale case: utilitarian design shrunk until it turned elegant.</p>
+      <ul>
+        <li>Proof that a <b>small</b> case can carry a <b>tool-watch</b> attitude</li>
+        <li>Gold-tone and bracelet-worn, so it read as jewelry</li>
+        <li>Playful, not precious — but it didn't survive. The next one must.</li>
+      </ul>
+      <a href="https://timex.com/products/teeny-tiny-timex-endorsed-by-dimepiece-20mm-stainless-steel-expansion-band-watch-with-perfect-fit-tw2y46600" target="_blank" rel="noopener">View the original ↗</a>
+    </article>
+  </section>
+
+  <hr>
+
+  <!-- PILLARS -->
+  <section id="pillars">
+    <span class="eyebrow">03 · The criteria</span>
+    <h2>Three things every candidate must pass</h2>
+    <div class="pillars">
+      <div class="pillar"><span class="n">i</span><div><h3>Proportion</h3><p>Lug-to-lug matters more than diameter. If the case overhangs the wrist, it's dad's watch — no matter how beautiful.</p></div></div>
+      <div class="pillar"><span class="n">ii</span><div><h3>Structure</h3><p>Crisp geometry, integrated or link bracelets, legible dials. The confidence of a men's watch, scaled down rather than softened.</p></div></div>
+      <div class="pillar"><span class="n">iii</span><div><h3>Endurance</h3><p>Sapphire crystal, real water resistance, a brand that services what it sells. Something to wear daily for a decade.</p></div></div>
+    </div>
+
+    <div class="meter" aria-label="Case-size sweet spot">
+      <span class="eyebrow">Case diameter · working estimate</span>
+      <div class="scale">
+        <div class="bar"></div>
+        <div class="zone" style="left:20.8%;width:25%"></div>
+        <div class="pin below" style="left:8.3%">Panthère S</div>
+        <div class="pin" style="left:33.3%">Lady-DJ 28</div>
+        <div class="pin below" style="left:45.8%">DJ 31</div>
+        <div class="pin" style="left:87.5%">Snowflake</div>
+        <div class="ticks"><span style="left:0.0%">20</span><span style="left:16.7%">24</span><span style="left:33.3%">28</span><span style="left:50.0%">32</span><span style="left:66.7%">36</span><span style="left:83.3%">40</span><span style="left:100.0%">44</span></div>
+      </div>
+      
+      <p class="small">Measured in mm. Gold band = likely sweet spot (~25–31mm round, or a rectangular case of similar footprint) for a petite wrist. To be refined once you measure your wrist.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- GRAILS -->
+  <section id="grails">
+    <span class="eyebrow">04 · The long-held wants</span>
+    <h2>Grails on the list</h2>
+    <div class="grails">
+      <article class="grail">
+        <header><div><div class="brand">Cartier</div><h3>Panthère de Cartier</h3></div><span class="tag ok">Natural fit</span></header>
+        <p>Square case, brick-link bracelet, Roman dial. Arguably the purest expression of “masculine structure, feminine posture” on this list.</p>
+        <p class="note">Comes in small and medium; worth trying both — and in steel, two-tone, or gold.</p>
+      </article>
+      <article class="grail">
+        <header><div><div class="brand">Rolex</div><h3>Lady-Datejust</h3></div><span class="tag ok">Natural fit</span></header>
+        <p>The boardroom classic. Fluted bezel, Jubilee or Oyster bracelet, universally understood.</p>
+        <p class="note">Also consider the Datejust 31 — the men's design language at a size that won't look borrowed.</p>
+      </article>
+      <article class="grail">
+        <header><div><div class="brand">Grand Seiko</div><h3>“Snowflake”</h3></div><span class="tag warn">Size check</span></header>
+        <p>The dial is a masterpiece and titanium wears light — but the classic Snowflake is a ~41mm men's piece, well outside the sweet spot.</p>
+        <p class="note">The question for next round: is there a Grand Seiko that keeps the craft at a smaller scale?</p>
+      </article>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ROADMAP -->
+  <section id="next">
+    <span class="eyebrow">05 · What comes next</span>
+    <h2>The app, in progress</h2>
+    <ul class="road">
+      <li class="done"><b>Landing page</b><span>This page — saved to your home screen.</span></li>
+      <li><b>Wrist fit check</b><span>Enter your wrist size; see which cases sit right vs. overhang.</span></li>
+      <li><b>Style profile</b><span>A short quiz to rank gold vs. steel, round vs. square, quartz vs. mechanical, budget.</span></li>
+      <li><b>The shortlist</b><span>Curated candidates with honest fit, wear, and longevity notes.</span></li>
+      <li><b>Compare & decide</b><span>Side-by-side, true-to-scale on your wrist, with try-on notes.</span></li>
+    </ul>
+
+    <div class="install" id="install">
+      <span class="eyebrow">Keep it on your home screen</span>
+      <ol>
+        <li><b>iPhone (Safari):</b> tap Share → <i>Add to Home Screen</i>.</li>
+        <li><b>Android (Chrome):</b> tap ⋮ → <i>Add to Home screen</i> / <i>Install app</i>.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <span class="mark">CL<b style="color:var(--gold);font-weight:400">O</b>CK</span>
+    Small, but serious.
+  </footer>
+</div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="card">
+    <span class="eyebrow" style="color:var(--gold-lo)">In the works</span>
+    <h3 id="sheetTitle">The edit opens next round.</h3>
+    <p>Next up: a wrist-fit check and a short style profile, then a shortlist built around your brief. Keep this on your home screen — it'll update in place.</p>
+    <button id="close">Got it</button>
+  </div>
+</div>
+
+<script>
+  // Dial ticks
+  (function(){
+    var g = document.getElementById('ticks'), ns = 'http://www.w3.org/2000/svg';
+    for (var i = 0; i < 12; i++) {
+      var a = i * 30 * Math.PI / 180, major = i % 3 === 0;
+      var r1 = major ? 50 : 54, r2 = 59, l = document.createElementNS(ns, 'line');
+      l.setAttribute('x1', 100 + r1 * Math.sin(a)); l.setAttribute('y1', 130 - r1 * Math.cos(a));
+      l.setAttribute('x2', 100 + r2 * Math.sin(a)); l.setAttribute('y2', 130 - r2 * Math.cos(a));
+      l.setAttribute('stroke-width', major ? 2.6 : 1.2);
+      g.appendChild(l);
+    }
+  })();
+
+  // Live time: analog hands + a tiny digital readout (a nod to the Timex)
+  function tick(){
+    var d = new Date(), h = d.getHours(), m = d.getMinutes(), s = d.getSeconds();
+    var rot = function(id, deg){ document.getElementById(id).setAttribute('transform', 'rotate(' + deg + ' 100 130)'); };
+    rot('hr', (h % 12) * 30 + m * 0.5);
+    rot('min', m * 6 + s * 0.1);
+    rot('sec', s * 6);
+    var hh = h % 12 || 12;
+    document.getElementById('digi').textContent = hh + ':' + String(m).padStart(2, '0') + (h < 12 ? ' AM' : ' PM');
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Coming-soon sheet
+  var sheet = document.getElementById('sheet');
+  document.getElementById('start').addEventListener('click', function(){ sheet.classList.add('open'); });
+  document.getElementById('close').addEventListener('click', function(){ sheet.classList.remove('open'); });
+  sheet.addEventListener('click', function(e){ if (e.target === sheet) sheet.classList.remove('open'); });
+
+  // Hide install tips when already launched from the home screen
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+    document.getElementById('install').classList.add('hidden');
+  }
+
+  // Offline support where allowed (no-op inside sandboxed previews)
+  try { if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){}); } catch (e) {}
+</script>
+</body>
+</html>
