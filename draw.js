@@ -116,6 +116,7 @@
     else if (bt === 'bars') cols([[1, 's']], 2.9, function (y) {
       br.push(el('rect', { x: x0 + bw * .04, y: y - .45, width: bw * .92, height: .9, rx: .4, fill: B(P.a), stroke: L(P.a), 'stroke-width': .08 }));
     });
+    else if (bt === 'flat') cols([[1, 's']], 2.7, null, .2);
     else if (bt === 'mesh') cols([[1, 's']], .7, null, .1);
     else if (bt === 'expansion') cols([[.18, 's'], [.64, 'a'], [.18, 's']], 1.5, null, .16);
     else if (bt === 'bangle') br.push(el('rect', { x: x0, y: segTop, width: bw, height: segBot - segTop, fill: B(P.s) }));
@@ -156,7 +157,7 @@
           fl.push(el('line', { x1: cx + (r - .5) * Math.sin(a), y1: cy - (r - .5) * Math.cos(a), x2: cx + (r - bz) * Math.sin(a), y2: cy - (r - bz) * Math.cos(a), stroke: i % 2 ? M(P.b).hi : M(P.b).lo, 'stroke-width': .35, 'stroke-opacity': .85 }));
         }
         out.push(fl.join(''));
-      } else if (d.bezel === 'claws') {
+      } else if (d.bezel === 'claws' || d.bezel === 'roman') {
         var rm = [];
         for (var j = 0; j < 12; j++) {
           var a2 = j * 30 * Math.PI / 180;
