@@ -123,17 +123,10 @@
   footer{text-align:center;padding:40px 0 56px;font-size:12px;color:var(--muted)}
   footer .mark{font-size:18px;display:block;margin-bottom:6px}
 
-  /* Dialog */
-  .sheet{position:fixed;inset:0;background:rgba(10,11,14,.7);display:none;align-items:flex-end;justify-content:center;z-index:10;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-  .sheet.open{display:flex}
-  .sheet .card{background:var(--paper);color:var(--ink);border-radius:20px 20px 0 0;max-width:640px;width:100%;padding:28px 24px calc(28px + env(safe-area-inset-bottom))}
-  .sheet h3{color:var(--ink);font-size:26px;margin:6px 0 8px}
-  .sheet p{color:#3A3B40;font-size:15px}
-  .sheet button{margin-top:18px;background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:12px 22px;font:500 14px var(--sans);cursor:pointer}
-
   @media (min-width:560px){ .hero h1{font-size:58px} .pillars{grid-template-columns:1fr} }
   @media (prefers-reduced-motion:reduce){ #sec{display:none} }
 </style>
+<link rel="stylesheet" href="deck.css">
 </head>
 <body>
 <div class="wrap">
@@ -178,7 +171,8 @@
     <span class="eyebrow">A private edit</span>
     <h1>The <i>next</i> watch.</h1>
     <p>Small, but serious. A considered search for a piece with masculine structure and feminine posture — sized for a 6¼″ wrist, built to outlast the last one.</p>
-    <button class="cta" id="start">Begin the edit <small>— soon</small></button>
+    <button class="cta" data-go="deck">Begin the edit</button>
+    <div><button class="linkbtn" data-go="picks">My shortlist</button></div>
   </header>
 
   <hr>
@@ -261,17 +255,17 @@
       <article class="grail">
         <header><div><div class="brand">Cartier</div><h3>Panthère de Cartier</h3></div><span class="tag ok">Fit ✓ · Budget ~</span></header>
         <p>Square case, brick-link bracelet, Roman dial. Arguably the purest expression of “masculine structure, feminine posture” on this list.</p>
-        <p class="note">Small or medium both suit a 6¼″ wrist. Steel is the likeliest way in at this budget; check current retail, as prices keep rising. Solid gold is well above $5K. Pre-owned widens the options, and it's quartz, which matches your preference.</p>
+        <p class="note">The small steel is $5,300 new and about $3,700–5,100 pre-owned. Two-tone is about $10,000 new; a vintage two-tone can be found near $5K with patience. It's quartz, which matches your preference.</p>
       </article>
       <article class="grail">
-        <header><div><div class="brand">Rolex</div><h3>Lady-Datejust</h3></div><span class="tag ok">Fit ✓ · Pre-owned</span></header>
+        <header><div><div class="brand">Rolex</div><h3>Lady-Datejust</h3></div><span class="tag ok">Fit ✓ · Budget ~</span></header>
         <p>The boardroom classic. Fluted bezel, Jubilee or Oyster bracelet, universally understood.</p>
-        <p class="note">New is above budget. Pre-owned two-tone (gold and steel) Lady-Datejusts are the realistic path to gold within $5K. The Datejust 31 fits you perfectly but is a stretch pre-owned at this budget. Note: these are automatic (mechanical), not quartz.</p>
+        <p class="note">Small Rolex prices jumped in 2026. A pre-owned two-tone 26mm now runs about $5,300–7,300 at dealers, and only private sales land under $5K. The Datejust 31 starts around $7,000. These are automatic (mechanical), not quartz.</p>
       </article>
       <article class="grail">
         <header><div><div class="brand">Grand Seiko</div><h3>“Snowflake”</h3></div><span class="tag warn">Size ✕ · Budget ✕</span></header>
         <p>The dial is a masterpiece and titanium wears light — but the classic Snowflake is a ~41mm men's piece, well outside the sweet spot.</p>
-        <p class="note">At ~41mm it sits well outside your 26–34mm band, and new pricing runs above $5K. Next round: find a smaller piece that keeps what you love about it, the textured dial and the craft.</p>
+        <p class="note">At ~41mm it sits well outside your 26–34mm band. The good news: Grand Seiko makes a small Snowflake, the 28.9mm quartz STGF359, at about $2,600 new. It's in the shortlist.</p>
       </article>
     </div>
   </section>
@@ -294,7 +288,7 @@
       </article>
       <article class="grail">
         <header><div><div class="brand">Track III</div><h3>The Build</h3></div><span class="tag ok">Open</span></header>
-        <p>Make one yourself, whether by assembling a movement in a watchmaking class or by choosing every part of a custom or modified piece. A watch with a story nobody else has.</p>
+        <p>Make one yourself: pick the case, dial, hands and movement, then assemble or modify it at your own bench, self-taught. A watch with a story nobody else has.</p>
       </article>
     </div>
   </section>
@@ -309,10 +303,11 @@
       <li class="done"><b>Landing page</b><span>This page — saved to your home screen.</span></li>
       <li class="done"><b>Wrist, metal &amp; budget</b><span>6¼″ wrist · gold-leaning · $2–5K.</span></li>
       <li class="done"><b>Condition, movement &amp; scope</b><span>Pre-owned OK · quartz-leaning · main watch + fun rotation + a build.</span></li>
-      <li><b>Fit check</b><span>See which cases sit right on a 6¼″ wrist and which overhang.</span></li>
-      <li><b>Style profile</b><span>A short quiz to rank gold vs. steel, round vs. square, quartz vs. mechanical, budget.</span></li>
-      <li><b>The shortlist</b><span>Curated candidates with honest fit, wear, and longevity notes.</span></li>
-      <li><b>Compare & decide</b><span>Side-by-side, true-to-scale on your wrist, with try-on notes.</span></li>
+      <li class="done"><b>The Main Watch shortlist</b><span>Swipe through candidates drawn to scale on your wrist, with prices, honest notes and styling. <a href="#deck" data-go="deck" style="color:var(--gold)">Open it →</a></span></li>
+      <li><b>Compare &amp; decide</b><span>Your finalists side by side, true to scale.</span></li>
+      <li><b>The Fun Rotation</b><span>A running list of small, playful watches: want, own, passed.</span></li>
+      <li><b>The Build</b><span>Parts, tools and a plan for a watch you put together yourself.</span></li>
+      <li><b>Try-on log</b><span>Notes and photos from the boutique.</span></li>
     </ul>
 
     <div class="install" id="install">
@@ -330,14 +325,38 @@
   </footer>
 </div>
 
-<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-  <div class="card">
-    <span class="eyebrow" style="color:var(--gold-lo)">In the works</span>
-    <h3 id="sheetTitle">The edit opens next round.</h3>
-    <p>Next up: a wrist-fit check and a short style profile, then a shortlist built around your brief. Keep this on your home screen — it'll update in place.</p>
-    <button id="close">Got it</button>
+<!-- ============ SHORTLIST DECK ============ -->
+<div class="view" id="view-deck" hidden>
+  <div class="topbar">
+    <a href="#home" data-go="home" aria-label="Back to the front page">‹ Clock</a>
+    <span class="mid" id="dkCount"></span>
+    <a href="#picks" data-go="picks" class="pill">Shortlist<b id="dkKept">0</b></a>
   </div>
+  <div class="feed" id="feed" aria-label="Watch candidates"></div>
 </div>
+
+<!-- ============ MY SHORTLIST ============ -->
+<div class="view" id="view-picks" hidden>
+  <div class="topbar">
+    <a href="#deck" data-go="deck" aria-label="Back to the watches">‹ Watches</a>
+    <span class="mid" id="pkCount"></span>
+    <a href="#home" data-go="home">Home</a>
+  </div>
+  <div class="scroll"><div class="inner" id="picksBody"></div></div>
+</div>
+
+<!-- ============ WATCH DETAIL ============ -->
+<div class="detail" id="detail" role="dialog" aria-modal="true" hidden>
+  <div class="topbar">
+    <button id="dClose" aria-label="Close">‹ Back</button>
+    <span class="mid">The detail</span>
+    <span style="min-width:44px"></span>
+  </div>
+  <div class="scroll"><div class="inner" id="detailBody"></div></div>
+  <div class="foot"><button class="pass" id="dPass">Pass</button><button class="keep" id="dKeep">Keep</button></div>
+</div>
+
+<div class="toast" id="toast" hidden><span></span><button>Undo</button></div>
 
 <script>
   // Dial ticks
@@ -365,12 +384,6 @@
   }
   tick(); setInterval(tick, 1000);
 
-  // Coming-soon sheet
-  var sheet = document.getElementById('sheet');
-  document.getElementById('start').addEventListener('click', function(){ sheet.classList.add('open'); });
-  document.getElementById('close').addEventListener('click', function(){ sheet.classList.remove('open'); });
-  sheet.addEventListener('click', function(e){ if (e.target === sheet) sheet.classList.remove('open'); });
-
   // Hide install tips when already launched from the home screen
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
     document.getElementById('install').classList.add('hidden');
@@ -379,5 +392,8 @@
   // Offline support where allowed (no-op inside sandboxed previews)
   try { if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){}); } catch (e) {}
 </script>
+<script src="watches.js"></script>
+<script src="draw.js"></script>
+<script src="deck.js"></script>
 </body>
 </html>
