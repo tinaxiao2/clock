@@ -35,7 +35,59 @@
     Object.keys(D.state.s).forEach(function (id) { if (!byId[id] || byId[id]._deck !== D) delete D.state.s[id]; });
     D.state.order = (D.state.order || []).filter(function (id) { return D.state.s[id] === 'k'; });
   });
-  function save(D) { try { localStorage.setItem(D.key, JSON.stringify(D.state)); } catch (e) {} }
+  function save(D) {
+    D.state.t = Date.now();
+    try { localStorage.setItem(D.key, JSON.stringify(D.state)); } catch (e) {}
+    cloudSave(D);
+  }
+
+  // ---------- account sync: picks follow you across visits and devices ----------
+  // Browser storage inside the claude.ai viewer can be cleared between visits, so the
+  // same picks are also kept in this viewer's private db subtree (data/users/<id>/).
+  var cloud = null, cloudUid = null, writing = {}, again = {};
+  function cloudSave(D) {
+    if (!cloud) return;
+    if (writing[D.name]) { again[D.name] = true; return; }
+    writing[D.name] = true; again[D.name] = false;
+    var body = { s: D.state.s, order: D.state.order, seenHint: !!D.state.seenHint, t: D.state.t || Date.now() };
+    cloud.collection('data/users/' + cloudUid).doc(D.name).set(JSON.parse(JSON.stringify(body)))
+      .catch(function () {})
+      .then(function () { writing[D.name] = false; if (again[D.name]) cloudSave(D); });
+  }
+  function merge(D, remote) {
+    var local = D.state, newer = (remote.t || 0) >= (local.t || 0) ? remote : local, older = newer === remote ? local : remote;
+    var s = {}, order = [];
+    Object.keys(older.s || {}).forEach(function (id) { s[id] = older.s[id]; });
+    Object.keys(newer.s || {}).forEach(function (id) { s[id] = newer.s[id]; });
+    (newer.order || []).concat(older.order || []).forEach(function (id) { if (s[id] === 'k' && order.indexOf(id) < 0) order.push(id); });
+    Object.keys(s).forEach(function (id) { if (!byId[id] || byId[id]._deck !== D) delete s[id]; });
+    return { s: s, order: order, seenHint: !!(local.seenHint || remote.seenHint), t: Math.max(local.t || 0, remote.t || 0) };
+  }
+  function startSync() {
+    if (!window.claude || typeof window.claude.use !== 'function') return;
+    Promise.all([window.claude.use('db'), window.claude.use('user')]).then(function (r) {
+      var db = r[0], user = r[1];
+      if (!db || !user || typeof user.id !== 'function') return;
+      return user.id().then(function (uid) {
+        if (!uid) return;
+        return Promise.all(Object.keys(DECKS).map(function (n) {
+          var D = DECKS[n];
+          return db.collection('data/users/' + uid).doc(n).get().then(function (snap) {
+            var before = JSON.stringify([D.state.s, D.state.order]);
+            if (snap && snap.exists) D.state = merge(D, snap.data() || {});
+            try { localStorage.setItem(D.key, JSON.stringify(D.state)); } catch (e) {}
+            return { D: D, changed: before !== JSON.stringify([D.state.s, D.state.order]), push: !snap || !snap.exists ? Object.keys(D.state.s).length > 0 : (D.state.t || 0) > ((snap.data() || {}).t || 0) };
+          });
+        })).then(function (res) {
+          cloud = db; cloudUid = uid;
+          var anyChanged = false;
+          res.forEach(function (x) { if (x.push) cloudSave(x.D); if (x.changed) anyChanged = true; });
+          if (anyChanged && shown !== 'home') rerender();
+          if (shown === 'picks') renderPicks();
+        });
+      });
+    }).catch(function () {});
+  }
   function kept(D) { return D.state.order.map(function (id) { return byId[id]; }); }
   function withStatus(D, v) { return D.list.filter(function (w) { return D.state.s[w.id] === v; }); }
   function undecided(D) { return D.list.filter(function (w) { return !D.state.s[w.id]; }); }
@@ -356,7 +408,7 @@
           '<button class="ghost small" data-restore="1">Restore</button></div>';
       }).join('') + '</div>';
     }
-    h += '<p class="fine">Your picks are saved in this browser on this device. Use “Copy as text” to keep a backup.' +
+    h += '<p class="fine">' + (cloud ? 'Your picks are saved to your Claude account, so they follow you between visits and devices.' : 'Your picks are saved in this browser for now; they sync to your account once it connects. Use “Copy as text” to keep a backup.') +
       (D.meta.asOf ? ' Prices checked ' + esc(D.meta.asOf) + '; ' + (D.own ? 'they move, so treat them as a guide.' : 'pre-owned prices move, so treat them as a guide.') : '') + '</p>' +
       (D.meta.note ? '<p class="fine">' + esc(D.meta.note) + '</p>' : '');
     $('picksBody').innerHTML = h;
@@ -465,4 +517,5 @@
   $('dOwn').addEventListener('click', function () { detailDecide('o'); });
 
   route();
+  startSync();
 })();
