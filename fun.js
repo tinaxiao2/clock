@@ -10,7 +10,7 @@
 
   window.FUN_META = {
     asOf: 'November 2026',
-    note: 'Specs and prices come from search summaries of maker, retailer and marketplace pages; the pages themselves could not be opened, so check the details before you buy.'
+    note: 'Specs come mostly from search summaries of maker, retailer and marketplace pages. Listing prices marked “Page checked” were read from the seller’s own page on 20 November 2026; everything else should be checked before you buy.'
   };
 
   var GOLD = [
@@ -37,25 +37,25 @@
       finish: 'Gold-tone steel', crystal: 'Curved sapphire', wr: '50 m', bracelet: 'Gold-tone steel', era: 'In production',
       size: { shape: 'rect', w: 21.5, h: 30, l2l: 32, approx: true },
       draw: { style: 'dolcevita', bracelet: 'oyster', bw: .74, dial: '#F3EFE9', markers: 'dot', ink: DARKGOLD, hands: DARKGOLD },
-      price: { newUsd: 450, where: 'Citizen US, Watches of Switzerland; often 25% off', sources: 'Citizen US and Watches of Switzerland' },
+      price: { text: '$380–475', sub: 'new', where: 'Citizen US (on sale), Abt', sources: 'Citizen US and Abt' },
       verdict: { fit: 'yes', fitNote: 'About 21.5 mm wide. The length was not confirmed; expect about 32 mm.' },
       why: ['On paper the most durable new watch here: no battery to die or leak, sapphire, 50 m, and the longest warranty.'],
-      honest: ['The gold-tone bracelet will still wear at the clasp over the years.', 'One owner needed a jeweller to size the links.', 'Solar watches need light. Left in a drawer for months, it will stop until it is recharged.'],
+      honest: ['The gold-tone bracelet will still wear at the clasp over the years.', 'Citizen’s own store lets you choose the band size at checkout, including 6¼ inches, so it arrives fitted.', 'Solar watches need light. Left in a drawer for months, it will stop until it is recharged.'],
       style: { stack: 'A gold bracelet watch beside thin gold chains can look continuous. Try it with the eye chain.', read: 'Soft-edged and quietly expensive-looking.' },
       links: [photos('Citizen L Bianca EW5602-57D wrist'), shop('Citizen Bianca EW5602-57D'), ['Citizen', 'https://www.citizenwatch.com/us/en/product/EW5602-57D']]
     },
     {
       id: 'f-seiko-tank', mood: 'gold', lasts: 'fair', brand: 'Seiko', name: 'Essentials Tank', variant: 'Gold-tone · leather',
-      pitch: 'The Tank look for about $215. Under 19 mm wide and under 5 mm thin, with Roman numerals on a white dial.',
+      pitch: 'The Tank look for about $225. Under 19 mm wide and under 5 mm thin, with Roman numerals on a white dial.',
       wear: 'Black strap, black mules, white dial, pearls.',
       refs: ['SWR054 (white dial, black strap)', 'SWR066 (champagne dial, brown strap)'], metal: 'plated', movement: 'Quartz', movementShort: 'Quartz',
       finish: 'Gold-tone steel', crystal: 'Hardlex mineral glass', wr: '30 m', bracelet: 'Leather strap', era: 'In production',
       size: { shape: 'rect', w: 18.9, l2l: 28.4, thick: 4.9 },
       draw: { style: 'tank', bracelet: 'leather', strap: 'black', bw: .68, markers: 'roman', dial: '#FAFAF7' },
-      price: { newUsd: 215, where: 'US Seiko dealers; seen as low as $141', sources: 'The Watch Connection, Skeie’s and Timepiece.com' },
+      price: { newUsd: 225, where: 'Seiko USA; discount sellers from about $141', sources: 'Seiko USA and Timepiece.com search results' },
       verdict: { fit: 'yes', fitNote: 'Slightly narrower than your Timex and very thin. Buyers say the strap runs short, which suits your wrist.' },
       why: ['A real watchmaker’s take on the gold rectangle, for the price of a dinner out.'],
-      honest: ['Mineral glass scratches more easily than sapphire.', 'How the gold is applied is not stated. Expect wear at the corners in a few years of daily use.', 'Order by reference: the men’s version (SWR052) looks the same and is larger.'],
+      honest: ['Mineral glass scratches more easily than sapphire.', 'How the gold is applied is not stated. Expect wear at the corners in a few years of daily use.', 'Order by reference: the men’s version (SWR052) looks the same and is larger.', 'Two US dealers that listed it have since removed it, so it may be going out of production.'],
       style: { stack: 'Leather has no shine, so all three chains can sit right beside it.', read: 'The quiet rectangle.' },
       links: [photos('Seiko SWR054 wrist'), shop('Seiko SWR054')]
     },
@@ -78,16 +78,16 @@
       id: 'f-lip-t18', mood: 'gold', lasts: 'fair', brand: 'Lip', name: 'Churchill T18', variant: 'Gold-plated · small seconds',
       pitch: 'A 1930s French men’s watch, the model given to Winston Churchill. Long, narrow and gold, for about €199.',
       wear: 'With brown wide-legs and cashmere, on a brown strap.',
-      refs: ['671441', '671006'], metal: 'plated', movement: 'Quartz (Ronda)', movementShort: 'Quartz',
+      refs: ['671006 (gold dial, brown strap)', '671015', '671943'], metal: 'plated', movement: 'Quartz (Ronda)', movementShort: 'Quartz',
       finish: 'Gold-plated steel', crystal: 'Mineral glass', wr: '30 m', bracelet: 'Leather strap', era: 'In production',
-      size: { shape: 'rect', w: 21, h: 30, l2l: 39, thick: 8.3, approx: true },
+      size: { shape: 'rect', w: 21.2, h: 30, l2l: 38.5, thick: 8.3 },
       draw: { style: 'rect', bracelet: 'leather', strap: 'brown', bw: .76, dial: '#F4F1EA', markers: 'stick', subseconds: true },
-      price: { text: '€199', sub: 'new · ships from France', where: 'lip.fr and French retailers', sources: 'Lip and Lepage' },
-      verdict: { fit: 'edge', fitNote: 'Narrow at 21 mm, but long: about 39 mm top to bottom, right at your line. It runs along the wrist like a Reverso.' },
+      price: { text: '€199', sub: 'new · EU delivery only', where: 'lip.fr (EU only); resellers for the US', sources: 'Lip' },
+      verdict: { fit: 'edge', fitNote: 'Narrow at 21 mm, but long: 38.5 mm top to bottom, right at your line. It runs along the wrist like a Reverso.' },
       why: ['The most menswear watch in the rotation, and one almost nobody in a US boardroom will have seen.'],
-      honest: ['US delivery was not confirmed. Check shipping and duty before ordering.', 'The movement is a common one any watchmaker can replace cheaply.', 'Mineral glass, and plating of unstated thickness, are the weak points. Splash-resistant only.'],
+      honest: ['Lip’s own shop delivers only within the EU. For the US you need a reseller, and I could not vet the one I found.', 'The movement is a common one any watchmaker can replace cheaply.', 'Mineral glass, and plating of unstated thickness, are the weak points. Splash-resistant only.'],
       style: { stack: 'On leather, the chains can sit beside it.', read: 'A grandfather’s watch from someone else’s country.' },
-      links: [photos('Lip Churchill T18 671441 wrist'), ['Lip', 'https://lip.fr/en/churchill/109-lip-churchill-t18-671441']]
+      links: [photos('Lip Churchill T18 671006 wrist'), ['Lip', 'https://lip.fr/en/churchill/58-lip-churchill-t18-671006']]
     }
   ];
 
@@ -98,10 +98,10 @@
       wear: 'Red ring with the red booties. Obviously.',
       refs: ['1100-L', '11/12.2'], metal: 'plated', movement: 'Swiss quartz', movementShort: 'Quartz',
       finish: 'Gold-plated', wr: 'None', bracelet: 'Rigid bangle', era: '1980s–90s; vintage only',
-      size: { shape: 'round', w: 26, l2l: 26, approx: true },
+      size: { shape: 'round', w: 26, l2l: 26, thick: 7 },
       draw: { style: 'round', bezelW: .15, bracelet: 'bangle', bw: .3, dial: '#FBFAF6', markers: 'none', hands: BLACK, parts: { b: '#B3262E' } },
       price: { preLow: 300, preHigh: 500, sub: 'vintage', where: 'eBay, Catawiki, vintage dealers', sources: 'Catawiki results and eBay listings' },
-      verdict: { fit: 'yes', fitNote: 'About 26 mm, on a rigid bangle said to suit wrists up to about 17 cm. Ask the seller for the inside measurement; a bangle cannot be resized.' },
+      verdict: { fit: 'yes', fitNote: '26 mm, on a rigid bangle that cannot be resized. Sizes vary: one dealer example measures 6 inches inside, smaller than your 6¼-inch wrist. Get the inside measurement before you pay.' },
       why: ['The most playful watch here, and the most “you” as an accessory: it changes with the outfit.'],
       honest: ['Count the coloured rings. Many sales include only one to three of the twelve; full sets cost the most.', 'Plating wear is common on the bangle edges and where the rings seat.', 'Keep it dry. No water resistance at all.', 'No reliable authentication guide exists. Check the caseback serial and buy with returns.', VINTAGE_RULE],
       style: { stack: 'It is a bangle. Nothing else on that wrist.', looks: [['Presence', 'Black zip dress, red booties, red ring.'], ['Work', 'Gray plaid dress with the black or burgundy ring.']], read: 'A wink. The one piece that shows you are not only serious.' },
@@ -124,15 +124,15 @@
     },
     {
       id: 'f-rw-tank', mood: 'vintage', lasts: 'delicate', brand: 'Raymond Weil', name: 'Gold-plated Tank', variant: 'Vintage · 1980s',
-      pitch: 'The 1980s answer to the Must de Cartier Tank, at about a tenth of the price. 18k gold electroplate, Swiss quartz.',
+      pitch: 'The 1980s answer to the Must de Cartier Tank, at a fraction of the price. 18k gold electroplate, Swiss quartz.',
       wear: 'Black dial, black cashmere, gold hoops.',
       refs: ['5742 “Tank Carrée”', '5741', '5744', '9006'], metal: 'plated', movement: 'Swiss quartz', movementShort: 'Quartz',
       finish: '18k gold electroplate', wr: 'None in practice', bracelet: 'Leather strap', era: '1980s; vintage only',
       size: { shape: 'rect', w: 22, l2l: 29, approx: true },
       draw: { style: 'tank', bracelet: 'leather', strap: 'black', bw: .68, dial: BLACK, markers: 'roman', ink: GOLDINK, hands: GOLDINK },
-      price: { preLow: 100, preHigh: 380, sub: 'vintage', where: 'eBay, Etsy, 1stDibs', sources: 'eBay and 1stDibs asking prices' },
+      price: { preLow: 100, preHigh: 450, sub: 'vintage', where: 'eBay, Etsy, 1stDibs', sources: 'eBay and 1stDibs asking prices' },
       verdict: { fit: 'yes', fitNote: 'About 18–23 mm wide depending on the reference. Ask for the measurement across the case.' },
-      why: ['You get the vermeil-Tank look from the main list without the $1,500–3,500 price or the worry. If it dies, it was $150.'],
+      why: ['You get the vermeil-Tank look from the main list without the $1,500–3,500 price or the worry. If it dies, you are out a few hundred dollars, not a few thousand.'],
       honest: ['These are asking prices; no confirmed sale prices were found.', 'Plating wears on the lugs and edges. Replacement crowns and straps are usually generic.', VINTAGE_RULE],
       style: { stack: 'On leather, so your chains can sit beside it.', read: 'Eighties gold, worn with a straight face.' },
       links: [photos('Raymond Weil 5742 tank gold electroplated watch'), ebay('Raymond Weil 18k gold electroplated tank watch')]
@@ -161,7 +161,7 @@
       size: { shape: 'rect', w: 20, l2l: 27, thick: 5, approx: true },
       draw: { style: 'rect', bracelet: 'leather', strap: 'burgundy', bw: .7, dial: CHAMP, markers: 'stick', ink: DARKGOLD, hands: DARKGOLD },
       price: { preLow: 50, preHigh: 200, sub: 'vintage', where: 'eBay, Etsy', sources: 'eBay sales and dealer listings' },
-      verdict: { fit: 'yes', fitNote: 'They vary from about 18 to 24 mm wide. Ask for the measurement, and for the bracelet length if it has one.' },
+      verdict: { fit: 'yes', fitNote: 'They vary from about 16 to 24 mm wide. Ask for the measurement, and for the bracelet length if it has one.' },
       why: ['The thinnest watch you can buy for the money, from a maker that built it properly.'],
       honest: ['Parts for these old movements are largely unavailable, and the ultra-thin ones are the hardest to revive. If it stops, it may be finished.', 'A leaked battery is the main killer.', 'Integrated bracelets may not adjust to your wrist.', VINTAGE_RULE],
       style: { stack: 'Thin gold beside thin gold. It belongs with the chains.', read: 'So thin it reads as a line of gold.' },
@@ -169,13 +169,13 @@
     },
     {
       id: 'f-chaika', mood: 'vintage', lasts: 'delicate', brand: 'Chaika', name: 'Soviet cocktail watch', variant: 'Vintage · hand-wound',
-      pitch: 'A tiny gold-plated watch from the USSR that you wind by hand each morning. About 18 mm, $35–80. Strange and charming.',
+      pitch: 'A tiny gold-plated watch from the USSR that you wind by hand each morning. About 18 mm. Strange and charming.',
       wear: 'With anything. It is a conversation, not an accessory.',
       refs: ['Chaika cal. 1601A'], metal: 'plated', movement: 'Hand-wound, 17 jewels', movementShort: 'Hand-wound',
       finish: 'Gold plate', wr: 'None', bracelet: 'Leather strap or period bracelet', era: 'Soviet era; vintage only',
       size: { shape: 'round', w: 18, l2l: 23, approx: true },
       draw: { style: 'round', bezelW: .07, bracelet: 'leather', strap: 'brown', bw: .45, dial: CREAM, markers: 'dot', ink: DARKGOLD, hands: DARKGOLD },
-      price: { preLow: 35, preHigh: 80, sub: 'vintage', where: 'eBay, Etsy, specialist sellers', sources: 'eBay and Grailed listings' },
+      price: { preLow: 50, preHigh: 170, sub: 'vintage', where: 'eBay, Etsy, Soviet Watch Store', sources: 'eBay listings and Soviet Watch Store' },
       verdict: { fit: 'yes', fitNote: 'Tiny: about 17–20 mm, smaller than your Timex.' },
       why: ['The cheapest way to own something mechanical. If you are curious about building a watch, this is also a movement you can open without fear.'],
       honest: ['It needs winding every day and will not keep quartz time.', 'Most are sold unserviced. Sellers are mostly in Eastern Europe, so allow for shipping and awkward returns.', 'An occasional watch, not a daily one.'],
@@ -208,12 +208,12 @@
       finish: 'Gold-tone stainless steel', crystal: 'Mineral glass', wr: '30 m', bracelet: 'Steel expansion band, fits 135–190 mm wrists', era: 'In production; stock comes and goes',
       size: { shape: 'rect', w: 20, h: 20, l2l: 22, thick: 7, approx: true },
       draw: { style: 'digital', bracelet: 'expansion', bw: .6 },
-      price: { text: '$139–159', sub: 'new', where: 'Timex, Todd Snyder, Nordstrom', sources: 'Timex US, Todd Snyder and Gear Patrol' },
+      price: { text: '$169–179', sub: 'new', where: 'Timex US', sources: 'Timex US' },
       verdict: { fit: 'yes', fitNote: '20 mm. You know how it sits.' },
       why: ['It was your favourite. It belongs on the list, with what the research found.'],
-      honest: ['Yours stopped at nine months. Timex’s warranty is one year, so it was still covered.', 'It runs on a very small battery. A flat battery is a plausible reason it stopped, so a battery change or a warranty claim is worth trying before you write it off. That is my inference, not a diagnosis.', 'I found no other reports of early failure, but there are very few reviews.', 'One reviewer said the resizing links are not secure and the watch fell off within a week.'],
+      honest: ['Yours stopped at nine months. Timex’s warranty is one year from purchase, so it may still be covered. The battery itself is excluded.', 'It runs on a very small battery. A flat battery is a plausible reason it stopped, so a battery change or a warranty claim is worth trying before you write it off. That is my inference, not a diagnosis.', 'I found no other reports of early failure, but there are very few reviews.', 'One reviewer said the resizing links are not secure and the watch fell off within a week.'],
       style: { stack: 'As you wore it.', read: 'The one that started this.' },
-      links: [photos('Teeny Tiny Timex Dimepiece TW2Y46600 wrist'), shop('Teeny Tiny Timex TW2Y46600'), ['Timex warranty', 'https://timex.com/pages/warranty-repair']]
+      links: [photos('Teeny Tiny Timex Dimepiece TW2Y46600 wrist'), ['Timex warranty', 'https://timex.com/pages/warranty-repair'], ['Repair request', 'https://timex.com/pages/watch-repair-request']]
     },
     {
       id: 'f-la680', mood: 'digital', lasts: 'fair', brand: 'Casio', name: 'Vintage LA680', variant: 'Gold-tone · mesh band',
@@ -243,7 +243,7 @@
       size: { shape: 'rect', w: 19.5, h: 15, l2l: 15, approx: true },
       draw: { style: 'digital', bracelet: 'bangle', bw: .42 },
       price: { text: '$120–155', sub: 'new', where: 'Casio US; resale sites', sources: 'G-Central, TechRadar and StockX' },
-      verdict: { fit: 'edge', fitNote: 'The face is about 19.5 mm wide, drawn here on a finger. The ring is a US 10.5 and the spacers bring it down to roughly a US 8, so on small hands it is a thumb or index-finger ring.' },
+      verdict: { fit: 'edge', fitNote: 'The face is about 19.5 mm wide, drawn here on a finger. The ring is a US 10.5 (20 mm inside) and the two spacers bring it down to about a US 9.5 and a US 8, so on small hands it is a thumb or index-finger ring.' },
       why: ['If the appeal of the Timex was how absurdly small it was, this is the end of that road.'],
       honest: ['Check the ring size against your own before buying. It will likely be too big for a ring finger.', 'US stock of the gold version was not confirmed.', 'All steel, so there is no coated plastic to wear through.'],
       style: { stack: 'You wear three delicate rings. This goes on the other hand, alone.', read: 'The detail someone notices in a meeting and asks about afterwards.' },
@@ -260,19 +260,19 @@
       price: { text: '$33', sub: 'new', where: 'Walmart, Best Buy, Newegg', sources: 'Walmart and Newegg' },
       verdict: { fit: 'yes', fitNote: 'The biggest digital here at 30.4 mm, and only 16 g. Light enough to forget.' },
       why: ['The one you cannot hurt: nothing plated, nothing precious.'],
-      honest: ['It looks like what it is: a plastic watch. That is the charm.', 'Splash-resistant only.'],
+      honest: ['It looks like what it is: a plastic watch. That is the charm.', 'Splash-resistant only.', 'Casio US now sells only the black one; pink comes from marketplace sellers.'],
       style: { stack: 'Keep your gold on the other wrist. Plastic and fine chains do not mix.', read: 'Off-duty, and not pretending otherwise.' },
       links: [photos('Casio LA-20WH-4A1 pink wrist'), shop('Casio LA-20WH')]
     },
     {
       id: 'f-swatch', mood: 'play', lasts: 'fair', brand: 'Swatch', name: 'Lady 25', variant: 'Colour · plastic',
-      pitch: 'The classic small Swatch: 25 mm, bright, about $70, with a two-year warranty.',
+      pitch: 'The classic small Swatch: 25 mm, bright, $75, with a two-year warranty.',
       wear: 'Blue dial with the blue Koché shirt dress.',
       refs: ['LE108 “The Gold Within You” (clear case, blue dial)', 'LB170E (black)'], metal: 'resin', metalLabel: 'Plastic', movement: 'Quartz', movementShort: 'Quartz',
       finish: 'Plastic case', wr: '30 m', bracelet: 'Silicone strap', era: 'In production',
       size: { shape: 'round', w: 25, l2l: 30, thick: 7, approx: true },
       draw: { style: 'round', bezelW: .08, bracelet: 'resin', strap: '#F2F2EF', bw: .5, dial: '#2F5FB3', markers: 'none', hands: '#F08A2B', parts: { c: '#D9DDE3', b: '#D9DDE3', a: '#D9DDE3', s: '#D9DDE3' } },
-      price: { text: '$65–75', sub: 'new', where: 'swatch.com', sources: 'Swatch US' },
+      price: { text: '$75', sub: 'new', where: 'swatch.com', sources: 'Swatch US' },
       verdict: { fit: 'yes', fitNote: '25 mm and 7 mm thin: properly small.' },
       why: ['Colour, from the brand that made cheap watches a pleasure.'],
       honest: ['Plastic scratches, and Swatches are generally replaced, not repaired.', 'Designs change each season, so the one you like may not stay in stock.'],
@@ -323,7 +323,7 @@
       price: { text: '$139', sub: 'new', where: 'Timex and retailers', sources: 'Timex and retailer listings' },
       verdict: { fit: 'yes', fitNote: '17 mm: the smallest wristwatch on the list, smaller than your Timex.' },
       why: ['If what you miss is the scale of the Timex, this goes further, with hands instead of digits.'],
-      honest: ['Same maker, same tiny battery and same one-year warranty as the watch that stopped on you.', 'No owner reports were found either way.', 'US stock was not confirmed.'],
+      honest: ['Same maker, same tiny battery and same one-year warranty as the watch that stopped on you.', 'No owner reports were found either way.', 'The gold-tone version is out of stock at Timex today; the two-tone version is available.'],
       style: { stack: 'Small enough to live in the stack with your chains.', read: 'Jewellery first.' },
       links: [photos('Timex Cavatina Mini 17mm TW2Y47400 wrist'), shop('Timex Cavatina Mini TW2Y47400')]
     },
@@ -338,7 +338,7 @@
       price: { text: '$36–67', sub: 'new', where: 'Amazon, Walmart, Newegg', sources: 'Walmart and Newegg' },
       verdict: { fit: 'yes', fitNote: '22 × 31 mm, the same footprint as the Panthère on your main list.' },
       why: ['The cheapest way to try the gold-rectangle shape on your wrist before spending thousands on one.'],
-      honest: ['No owner reports on how the plating holds up were found.', 'Mineral glass, splash-resistant only.'],
+      honest: ['No owner reports on how the plating holds up were found.', 'Mineral glass, splash-resistant only.', 'Casio does not sell this model in the US, so it comes from marketplace sellers.'],
       style: { stack: 'A gold bracelet watch: chains on the other wrist.', read: 'A rehearsal for the real thing.' },
       links: [photos('Casio LTP-V007G-9B wrist'), shop('Casio LTP-V007G-9B')]
     }
