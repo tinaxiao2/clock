@@ -77,6 +77,49 @@
     return '<div class="tags">' + h + '</div>';
   }
 
+  // ---------- listings: a dated snapshot of places to buy ----------
+  var LIST = window.LISTINGS || { byId: {} };
+  var STATUS = { in_stock: ['ok', 'In stock'], for_sale: ['ok', 'For sale'], pre_order: ['mid', 'Pre-order'], out_of_stock: ['warn', 'Out of stock'], sold: ['warn', 'Sold'], unknown: ['plain', 'Stock unconfirmed'] };
+  var CUR = { USD: '$', EUR: '€', GBP: '£', CAD: 'C$' };
+  function money(l) {
+    if (l.price == null) return 'See listing';
+    var n = Number(l.price);
+    return (CUR[l.currency || 'USD'] || l.currency + ' ') + n.toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  }
+  function listingsFor(id) { var e = LIST.byId[id]; return e && e.items && e.items.length ? e : null; }
+  function buyLine(w) {
+    var e = listingsFor(w.id); if (!e) return '';
+    var l = e.items[0];
+    return '<a class="buyline" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + money(l) + ' at ' + esc(l.seller) + ' ↗</a>';
+  }
+  function listingsHTML(w) {
+    var e = LIST.byId[w.id]; if (!e) return '';
+    var h = '<div class="block"><h4>For sale now</h4>';
+    if (e.summary) h += '<p>' + esc(e.summary) + '</p>';
+    h += '<div class="lsts">' + (e.items || []).map(function (l) {
+      return '<a class="lst" href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
+        '<div class="lst-top"><b>' + esc(l.seller) + '</b><span class="lst-price">' + money(l) + '</span></div>' +
+        '<div class="lst-sub">' + esc(l.title || '') + (l.shipping ? ' · ' + esc(l.shipping) : '') + '</div>' +
+        '<div class="tags">' + tag(STATUS[l.status] || STATUS.unknown) + '<span class="tag plain">' + (l.verified === 'opened' ? 'Page checked' : 'Seen in search only') + '</span>' +
+        (l.returns ? '<span class="tag plain">' + esc(l.returns) + '</span>' : '') + '</div>' +
+        (l.note ? '<p class="lst-note">' + esc(l.note) + '</p>' : '') +
+        (l.caution ? '<p class="lst-warn">' + esc(l.caution) + '</p>' : '') +
+        '<span class="lst-open">Open listing ↗</span></a>';
+    }).join('') + '</div>';
+    if (e.extra) h += '<div class="extra"><h5>' + esc(e.extra.title) + '</h5>' + list(e.extra.lines) + '</div>';
+    return h + '<p class="fine">Checked ' + esc(LIST.asOf || '') + '. “Page checked” means the seller’s page was opened that day; “Seen in search only” means it was not. Listings sell and prices change.</p></div>';
+  }
+  function totalLine(D, k) {
+    var usd = 0, other = 0, none = 0;
+    k.forEach(function (w) {
+      var e = listingsFor(w.id), l = e && e.items[0];
+      if (!l || l.price == null) none++; else if ((l.currency || 'USD') === 'USD') usd += Number(l.price); else other++;
+    });
+    if (!usd && !other) return '';
+    return '<p class="total">Buying ' + (k.length === 1 ? 'it' : 'all ' + k.length) + ' at today’s first listing: about <b>$' + Math.round(usd).toLocaleString('en-US') + '</b>' +
+      (other ? ', plus ' + other + ' priced in another currency' : '') + (none ? '. ' + none + ' ' + (none === 1 ? 'has' : 'have') + ' no listing yet' : '') + '.</p>';
+  }
+
   // ---------- routing ----------
   var views = { deck: $('view-deck'), picks: $('view-picks') }, shown = 'home';
   function route() {
@@ -296,10 +339,11 @@
     }
     if (D.own && k.length) h += '<div class="sechead"><span class="eyebrow">Want · ' + k.length + '</span></div>';
     h += '<div class="rows">' + k.map(function (w, i) {
-      if (D.ranked) return '<div class="row" data-id="' + w.id + '"><span class="rank">' + (i + 1) + '</span>' + thumb(w) + rowText(w, '<button class="rm" data-rm="1">Remove</button>') +
+      if (D.ranked) return '<div class="row" data-id="' + w.id + '"><span class="rank">' + (i + 1) + '</span>' + thumb(w) + rowText(w, buyLine(w) + '<button class="rm" data-rm="1">Remove</button>') +
         '<div class="ctl"><button data-mv="-1" aria-label="Move up"' + (i === 0 ? ' disabled' : '') + '>↑</button><button data-mv="1" aria-label="Move down"' + (i === k.length - 1 ? ' disabled' : '') + '>↓</button></div></div>';
-      return '<div class="row plainrow" data-id="' + w.id + '">' + thumb(w) + rowText(w, '<button class="rm" data-rm="1">Remove</button>') + '<button class="ghost small" data-set="o">I own it</button></div>';
+      return '<div class="row plainrow" data-id="' + w.id + '">' + thumb(w) + rowText(w, buyLine(w) + '<button class="rm" data-rm="1">Remove</button>') + '<button class="ghost small" data-set="o">I own it</button></div>';
     }).join('') + '</div>';
+    h += totalLine(D, k);
     if (k.length || o.length) {
       h += '<div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" id="copyBtn">Copy as text</button>' +
         (left ? '<button class="ghost" data-go="' + D.deckHash + '">' + left + ' more to see</button>' : '') + '</div><div id="copyOut"></div>';
@@ -353,7 +397,7 @@
       try { navigator.clipboard.writeText(txt).then(function () { btn.textContent = 'Copied ✓'; }, fallback); } catch (err) { fallback(); }
       return;
     }
-    if (e.target.closest('[data-go]')) return;
+    if (e.target.closest('[data-go]') || e.target.closest('a')) return;
     if (id) openDetail(id);
   });
 
@@ -380,6 +424,7 @@
       '<div class="rowm"><span>' + D.budgetLabel + '</span><b>' + D.budget + '</b></div></div>' +
       (v.budgetNote ? '<p style="margin-top:12px">' + esc(v.budgetNote) + '</p>' : '') +
       '<p class="fine">' + (p.sources ? 'Drawn from ' + esc(p.sources) + '. ' : '') + 'Checked ' + esc(p.asOf || D.meta.asOf || '') + '. ' + (D.own ? 'Prices and stock change.' : 'Asking prices vary with condition, box and papers.') + '</p></div>';
+    h += listingsHTML(w);
     if (w.honest && w.honest.length) h += '<div class="block"><h4>' + D.honestTitle + '</h4>' + list(w.honest) + '</div>';
     if (st.cuff || st.stack || st.read || (st.looks && st.looks.length)) h += '<div class="block wear"><h4>How to wear it</h4><dl>' +
       (st.cuff ? '<div><dt>At the cuff</dt><dd>' + esc(st.cuff) + '</dd></div>' : '') +

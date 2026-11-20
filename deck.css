@@ -135,3 +135,22 @@ body.app-open{overflow:hidden}
 .foot .keep{border:0;background:linear-gradient(135deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo));color:var(--ink)}
 .foot .own{background:none;border:1px solid var(--gold);color:var(--gold-hi);flex:.8}
 .foot .on{outline:2px solid var(--paper);outline-offset:2px}
+
+/* ---------- listings ---------- */
+.lsts{display:grid;gap:10px;margin-top:12px}
+.lst{display:block;background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--soft)}
+.lst-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.lst-top b{font-weight:500;color:var(--paper);font-size:15.5px}
+.lst-price{font-family:var(--serif);font-size:22px;color:var(--paper);white-space:nowrap}
+.lst-sub{font-size:13px;color:var(--muted);margin:2px 0 10px}
+.lst-note{font-size:14px !important;margin-top:10px}
+.lst-warn{font-size:13.5px !important;margin-top:8px !important;color:#E7A892;padding-left:16px;position:relative}
+.lst-warn::before{content:"!";position:absolute;left:0;top:0;font-weight:500}
+.lst-open{display:inline-block;margin-top:12px;font-size:13px;color:var(--gold);letter-spacing:.04em}
+.extra{margin-top:16px;border:1px dashed var(--line);border-radius:14px;padding:14px 16px}
+.extra h5{font:500 13px var(--sans);color:var(--paper);margin-bottom:8px}
+.extra li{font-size:14px}
+.buyline{display:inline-block;font-size:12.5px;color:var(--gold);text-decoration:none;margin-top:4px}
+.row .buyline + .rm{display:block}
+.total{margin-top:16px;font-size:14.5px;border-top:1px dashed var(--line);padding-top:14px}
+.total b{color:var(--paper);font-weight:500}
