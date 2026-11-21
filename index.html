@@ -170,7 +170,7 @@
     <h1>The <i>next</i> watch.</h1>
     <p>Small, but serious. A considered search for a piece with masculine structure and feminine posture — sized for a 6¼″ wrist, built to outlast the last one.</p>
     <button class="cta" data-go="deck">Begin the edit</button>
-    <div><button class="linkbtn" data-go="picks">My shortlist</button> <button class="linkbtn" data-go="fun">The fun rotation</button></div>
+    <div><button class="linkbtn" data-go="picks">My shortlist</button> <button class="linkbtn" data-go="fun">The fun rotation</button> <button class="linkbtn" data-go="inbox">Send a watch</button></div>
   </header>
 
   <hr>
@@ -338,6 +338,33 @@
   <div class="feed" id="feed" aria-label="Watch candidates"></div>
 </div>
 
+<!-- ============ SEND A WATCH ============ -->
+<div class="view" id="view-inbox" hidden>
+  <div class="topbar">
+    <a href="#home" data-go="home">‹ Clock</a>
+    <span class="mid">Send a watch</span>
+    <a href="#picks" data-go="picks">Shortlist</a>
+  </div>
+  <div class="scroll"><div class="inner">
+    <span class="eyebrow">Found one you like?</span>
+    <h2>Send it to Clock</h2>
+    <p>Paste a link from any shop or listing. Next time we talk, I’ll research it and add it to the right deck, drawn to scale with a fit verdict, cautions and styling.</p>
+    <form id="inForm" class="inform" autocomplete="off">
+      <label>Link<input id="inUrl" type="url" inputmode="url" placeholder="https://…" required></label>
+      <label>Which list<select id="inList"><option value="main">Main watch ($2–5K)</option><option value="fun">Fun rotation (under $500)</option><option value="either">Not sure</option></select></label>
+      <label>Note <small>(optional)</small><textarea id="inNote" rows="2" placeholder="What caught your eye?"></textarea></label>
+      <button class="cta" type="submit">Send to Clock</button>
+      <p class="fine" id="inMsg"></p>
+    </form>
+    <div class="howto">
+      <b>From your phone’s browser</b>
+      <ol><li>On the watch page, tap Share, then <i>Copy</i>.</li><li>Open Clock from your home screen and tap <i>Send a watch</i>.</li><li>Paste the link and tap Send.</li></ol>
+    </div>
+    <div class="sechead"><span class="eyebrow" id="inCount">Sent</span></div>
+    <div class="rows" id="inList2"></div>
+  </div></div>
+</div>
+
 <!-- ============ MY SHORTLIST ============ -->
 <div class="view" id="view-picks" hidden>
   <div class="topbar">
@@ -400,5 +427,6 @@
 <script src="listings.js"></script>
 <script src="draw.js"></script>
 <script src="deck.js"></script>
+<script src="inbox.js"></script>
 </body>
 </html>

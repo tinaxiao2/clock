@@ -48,6 +48,42 @@
         ['Cartier', 'https://cartier.com/en-us/watches/collections/panthere-de-cartier/panthere-de-cartier-watch-small-model-CRWSPN0006.html']]
     },
     {
+      id: 'chanel-ribbon', brand: 'Chanel', name: 'Première Ribbon', variant: 'Red · 18k gold · quartz',
+      pitch: 'You sent this one. An octagonal gold case the shape of Place Vendôme, a red lacquer dial, and a red rubber ribbon of a strap. Smaller than your Timex.',
+      refs: ['H9857'], metal: 'gold', movement: 'Quartz', movementShort: 'Quartz',
+      crystal: 'Sapphire', wr: '30 m (splash-safe)', bracelet: 'Red rubber strap with a velvet-touch finish', era: 'In production',
+      size: { shape: 'rect', w: 15.2, h: 19.7, l2l: 19.7, thick: 7.5 },
+      draw: { style: 'dolcevita', bracelet: 'resin', strap: '#B3122E', bw: .62, dial: '#B3122E', markers: 'none', hands: '#F6E7BE' },
+      price: { lead: 'new', newUsd: 6050, sources: 'a C.D. Peacock listing, via search results (Chanel’s own site could not be opened)' },
+      flag: 'You sent this',
+      verdict: {
+        fit: 'yes', budget: 'no',
+        fitNote: 'Tiny: 15.2 mm wide and 19.7 mm long, smaller than your Timex in both directions. It reads as jewellery, not as a tool watch.',
+        budgetNote: 'About $6,050 new in the US, over your $5,000 ceiling. I have not checked pre-owned prices yet; ask me to and I’ll look.'
+      },
+      why: [
+        'You sent it. It’s the most purely feminine watch on the list, and the boldest: the only one in colour.',
+        'It has some of what you liked in the Teeny Tiny Timex: very small, gold, and a little playful.'
+      ],
+      honest: [
+        'The case is 18k gold with a titanium back, and the crown is set with a diamond.',
+        'It has no hour markers and the dial is red, so it is harder to read at a glance than anything else here.',
+        'A rubber strap is comfortable and easy to replace, but this one is a Chanel part, not a standard size.',
+        'Splash-resistant only (30 m).',
+        'It goes against your “masculine structure” brief. That may be exactly why you like it.'
+      ],
+      style: {
+        cuff: 'At 7.5 mm thick and 15 mm wide it slips under any cuff, so treat it as a flash of red that shows when you move.',
+        stack: 'Gold case, so it sits happily beside your chains, but the red is the statement. Keep the other wrist quiet, or wear just the eye chain alongside.',
+        looks: [
+          ['Presence', 'Black zip dress and the red booties: red at the wrist and the feet, nothing else.'],
+          ['Boardroom', 'Gray plaid dress, pearls. One shot of red in an otherwise quiet outfit.']
+        ],
+        read: 'The red you choose on purpose.'
+      },
+      links: [['Chanel', 'https://www.chanel.com/us/watches/p/H9857/premiere-ribbon-red-watch/'], ['Photos', 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent('Chanel Premiere Ribbon red H9857 wrist')]]
+    },
+    {
       id: 'gs-stgf359', brand: 'Grand Seiko', name: 'The small Snowflake', variant: 'STGF359 · steel',
       pitch: 'Your Snowflake, at 28.9 mm. Same snow-textured white dial, quartz accurate to ten seconds a year, and the toughest watch on this list.',
       refs: ['STGF359'], metal: 'steel', movement: 'Quartz (4J52), accurate to ±10 seconds a year', movementShort: 'Quartz',

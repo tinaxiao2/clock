@@ -174,19 +174,21 @@
   }
 
   // ---------- routing ----------
-  var views = { deck: $('view-deck'), picks: $('view-picks') }, shown = 'home';
+  var views = { deck: $('view-deck'), picks: $('view-picks'), inbox: $('view-inbox') }, shown = 'home';
   function route() {
     var h = (location.hash || '').replace('#', ''), v = 'home';
     Object.keys(DECKS).forEach(function (n) {
       if (h === DECKS[n].deckHash) { cur = DECKS[n]; v = 'deck'; }
       if (h === DECKS[n].listHash) { cur = DECKS[n]; v = 'picks'; }
     });
+    if (h === 'inbox') v = 'inbox';
     shown = v;
-    views.deck.hidden = v !== 'deck'; views.picks.hidden = v !== 'picks';
+    views.deck.hidden = v !== 'deck'; views.picks.hidden = v !== 'picks'; views.inbox.hidden = v !== 'inbox';
     document.body.classList.toggle('app-open', v !== 'home');
     $('toast').hidden = true;
     if (v === 'deck') renderDeck();
     if (v === 'picks') renderPicks();
+    if (v === 'inbox' && window.renderInbox) window.renderInbox();
     if (v === 'home') closeDetail();
   }
   function go(name) {
