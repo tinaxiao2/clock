@@ -232,6 +232,31 @@
     }
   ];
 
+  DIGITAL.push({
+      id: 'f-a168', mood: 'digital', lasts: 'fair', brand: 'Casio', name: 'A168 Gold', variant: 'Gold-tone · full size',
+      pitch: 'You sent this one. The classic gold Casio: a light, a stopwatch and an alarm, for loose change. It is the full-size, unisex version.',
+      wear: 'Pushed up a sleeve, worn as an obvious joke.',
+      flag: 'You sent this',
+      refs: ['A168WG-9 (US: A168WG-9UR)'], metal: 'plated', movement: 'Digital quartz with light, stopwatch and alarm', movementShort: 'Digital',
+      finish: 'Gold-tone finish on the case and steel bracelet', wr: '30 m: splash only, not for swimming or showering', bracelet: 'Gold-tone steel bracelet', era: 'In production',
+      size: { shape: 'rect', w: 36.3, h: 38.6, l2l: 38.6, approx: true },
+      draw: { style: 'digital', bracelet: 'flat', bw: .5 },
+      price: { text: 'About $11–60', sub: 'new', where: 'Walmart and many others', sources: 'Walmart listings, via search results (Walmart’s site could not be opened)' },
+      verdict: { fit: 'edge', fitNote: 'About 36 mm wide, half again as wide as the LA670 and wider than anything on your main list. The top-to-bottom span stays under your 40 mm line, but the square face will look broad on a 6¼-inch wrist. This is the one that can read as Dad’s.' },
+      why: [
+        'You sent it. It is the original gold Casio, the watch the Teeny Tiny Timex was shrinking.',
+        'If you want the same look at your scale, the LA670 (24.6 mm) and LA680 (28.6 mm) earlier in this deck are its smaller sisters.'
+      ],
+      honest: [
+        'Walmart showed $11 in one search snapshot, which is unusually low for this model; the same item was $56.95 on Walmart Business. Check who the seller is before buying.',
+        'Like the other gold Casios, the gold is a finish and will wear at the edges with daily use. Search results did not say what the case is made of.',
+        'One reviewer said it was not as water resistant as advertised. Keep it dry.',
+        'Strap sizing: it is a men’s-length bracelet, so expect to remove several links.'
+      ],
+      style: { stack: 'Alone on its wrist. At this size it is the statement.', read: 'Deliberately unserious, at full size.' },
+      links: [['Walmart', 'https://www.walmart.com/ip/Casio-Vintage-Retro-Gold-Digital-Dial-Stainless-Steel-Unisex-Watch-A168WG9UR/145219115'], photos('Casio A168WG-9 gold on wrist women')]
+  });
+
   var PLAY = [
     {
       id: 'f-ring', mood: 'play', lasts: 'sturdy', brand: 'Casio', name: 'Ring Watch', variant: 'Gold · worn on a finger',
@@ -344,7 +369,7 @@
     }
   ];
 
-  var ORDER = ['f-la670', 'f-prx25', 'f-gucci-bangle', 'f-ring', 'f-bianca', 'f-teeny', 'f-omega-deville', 'f-nixon', 'f-la20', 'f-seiko-tank', 'f-rw-tank',
+  var ORDER = ['f-la670', 'f-a168', 'f-prx25', 'f-gucci-bangle', 'f-ring', 'f-bianca', 'f-teeny', 'f-omega-deville', 'f-nixon', 'f-la20', 'f-seiko-tank', 'f-rw-tank',
     'f-la680', 'f-swatch', 'f-lovely-square', 'f-gucci-3000', 'f-cavatina', 'f-shark', 'f-lip-t18', 'f-lassale', 'f-casio-tank', 'f-chaika'];
   var all = GOLD.concat(VINTAGE, DIGITAL, PLAY, GOLD2), map = {};
   all.forEach(function (w) { map[w.id] = w; });

@@ -226,3 +226,10 @@
   };
   for (var k in M) window.LISTINGS.byId[k] = M[k];
 })();
+
+window.LISTINGS.byId['f-a168'] = {
+  summary: 'Walmart lists it, but its site can’t be opened from here. The $11 price comes from a search snapshot and looks too low for this watch, so check the seller before you pay.',
+  items: [
+    { seller: 'Walmart', title: 'Casio A168WG-9UR · gold-tone', price: 11, status: 'unknown', verified: 'search', url: 'https://www.walmart.com/ip/Casio-Vintage-Retro-Gold-Digital-Dial-Stainless-Steel-Unisex-Watch-A168WG9UR/145219115', note: 'The link you sent.', caution: 'Check whether Walmart or a third-party seller ships it.' }
+  ]
+};
