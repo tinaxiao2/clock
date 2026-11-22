@@ -233,3 +233,5 @@ window.LISTINGS.byId['f-a168'] = {
     { seller: 'Walmart', title: 'Casio A168WG-9UR · gold-tone', price: 11, status: 'unknown', verified: 'search', url: 'https://www.walmart.com/ip/Casio-Vintage-Retro-Gold-Digital-Dial-Stainless-Steel-Unisex-Watch-A168WG9UR/145219115', note: 'The link you sent.', caution: 'Check whether Walmart or a third-party seller ships it.' }
   ]
 };
+
+window.LISTINGS.byId['f-la670'].items.push({ seller: 'Walmart', title: 'LA670WGA-1 · gold, black face', price: null, status: 'unknown', verified: 'search', url: 'https://www.walmart.com/ip/138761651', note: 'The link you sent. Reviewers call it smaller and daintier than expected.', caution: 'Walmart’s page can’t be opened from here, so price and seller are unconfirmed. One reviewer says the small silver buckle clashes with the gold.' });
